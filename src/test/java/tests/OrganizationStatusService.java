@@ -17,13 +17,6 @@ public class OrganizationStatusService {
 
     }
 
-    @org.testng.annotations.Test
-    public void put(){
-
-        RequestSpecification specification;
-       // specification.pathParams()
 
 
-
-    }
 }
