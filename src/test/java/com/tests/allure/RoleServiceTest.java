@@ -1,4 +1,4 @@
-package tests;
+package com.tests.allure;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
