@@ -34,7 +34,7 @@ public class Reusable {
 
     }
 
-    public static Response putMethod(String url, Map<String,Object> expectedBody){
+    public static Response putMethod(String url, Object expectedBody){
 
 
         login.beToken();
@@ -54,7 +54,7 @@ public class Reusable {
 
     }
 
-    public static Response postMethod(String url, Map<String,Object> expectedBody){
+    public static Response postMethod(String url, Object expectedBody){
 
 
         login.beToken();
@@ -75,7 +75,7 @@ public class Reusable {
 
     }
 
-    public static Response deleteMethod(String url, String id){
+    public static Response deleteMethod(String url, int id){
 
 
         login.beToken();
