@@ -3,7 +3,7 @@
 <suite name="Test Suite" verbose="2">
     <test name="User Tests">
         <classes>
-            <class name="tests.Test" />
+            <class name="com.tests.allure.CountryServiceTest" />
         </classes>
     </test>
 </suite>

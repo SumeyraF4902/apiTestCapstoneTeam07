@@ -1,4 +1,4 @@
-package tests;
+package com.tests.allure;
 
 import com.github.fge.jsonschema.core.processing.ProcessorSelectorPredicate;
 import com.github.fge.jsonschema.core.report.MessageProvider;

@@ -69,25 +69,29 @@
             <version>4.4.0</version>
         </dependency>
 
-        <!--
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-testng -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
-            <version>2.17.3</version>
+            <version>2.20.1</version>
         </dependency>
 
 
+
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-rest-assured -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-rest-assured</artifactId>
-            <version>2.13.2</version>
+            <version>2.20.1</version>
         </dependency>
+
 
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-maven</artifactId>
             <version>2.9</version>
         </dependency>
+
          <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -95,8 +99,6 @@
             <scope>test</scope>
         </dependency>
 
-
-        -->
 
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -120,13 +122,13 @@
                         </configuration>
                     </plugin>
 
-         <!--  <plugin>
+          <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20</version>
+                <version>2.20.1</version>
                 <configuration>
                     <testFailureIgnore>false</testFailureIgnore>
-                    <!-suppress UnresolvedMavenProperty
+                    <!--suppress UnresolvedMavenProperty-->
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
@@ -138,15 +140,16 @@
                     </properties>
                 </configuration>
                 <dependencies>
+                    <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
                     <dependency>
                         <groupId>org.aspectj</groupId>
                         <artifactId>aspectjweaver</artifactId>
-                        <!-suppress UnresolvedMavenProperty
-                        <version>${aspectj.version}</version>
+                        <version>1.9.19</version>
+                        <scope>runtime</scope>
                     </dependency>
+
                 </dependencies>
             </plugin>
-    -->
 
         </plugins>
     </build>
