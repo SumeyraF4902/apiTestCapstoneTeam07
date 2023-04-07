@@ -101,7 +101,7 @@ public class OrganizationServiceTest {
 
         System.out.println("requestBody = " + requestBody);
 
-        Response response = Reusable.putMethod("organizationURL", requestBody);
+        Response response = Reusable.putMethod("organizationURL{id}", requestBody);
 
         HashMap<String, Object> actualData = JsonToJava.convertJsonToJavaObject(response.asString(),HashMap.class);
 
