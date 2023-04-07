@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.BeforeClass;
 
 
 public class Login {
@@ -14,11 +15,14 @@ public class Login {
 
     private String password = "6121.Bkr";
 
+    public static String token;
+
 
     public Login() {
 
     }
-    public String beToken(){
+    @BeforeClass
+    public void beToken(){
         WebDriverManager.chromedriver().setup();
         ChromeOptions opt = new ChromeOptions().setHeadless(true);
         opt.addArguments("--remote-allow-origins=*");
@@ -29,10 +33,10 @@ public class Login {
         driver.findElement(By.tagName("button")).click();
         driver.navigate().to("https://qa-gm3.quaspareparts.com/auth/userinfo");
         JsonPath path = new JsonPath(driver.findElement(By.tagName("body")).getText());
-        String token = path.getString("access_token");
+         token = path.getString("access_token");
         System.out.println("Token: " + token);
         driver.quit();
-        return token;
+
 
     }
 

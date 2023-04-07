@@ -13,20 +13,17 @@ import utilities.Reusable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserStatusServiceTest {
+public class UserStatusServiceTest extends Login{
 
 
-    public static Login login = new Login();
 
-    public static String token;
+
+
 
 
     public static Response responsePost;
 
-    @BeforeClass
-    public void getToken(){
-        token = login.beToken();
-    }
+
     @Test
     public void apostUserStatusService(){
 
@@ -36,7 +33,7 @@ public class UserStatusServiceTest {
 
         System.out.println("reqBody = " + reqBody);
 
-        responsePost = Reusable.postMethod("userStatusPost",reqBody,token);
+        responsePost = Reusable.postMethod("userStatusPost",reqBody);
 
         responsePost.then().assertThat().statusCode(201);
 
@@ -48,7 +45,7 @@ public class UserStatusServiceTest {
 
         String id = responsePost.jsonPath().getString("id");
 
-       Response response = Reusable.getIDMethod("userStatusPost",token,id);
+       Response response = Reusable.getIDMethod("userStatusPost",id);
 
         response.then().assertThat().statusCode(200);
 

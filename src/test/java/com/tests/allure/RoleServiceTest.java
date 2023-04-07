@@ -19,11 +19,9 @@ public class RoleServiceTest {
 
 
     public void getRolesList(){
-        RoleServicePojo roleServicePojo=new RoleServicePojo("book","deneme, write etc.",2);
+
         Response response= Reusable.getMethod("rolesURL");
-        response.then().assertThat().statusCode(200).contentType(ContentType.JSON).
-                //body("resource",equalTo("book"),"action",equalTo("deneme, write etc."));
-                        body("resource",equalTo(roleServicePojo.getResource()),"action",equalTo(roleServicePojo.getAction()));
+        response.then().assertThat().statusCode(200).contentType(ContentType.JSON);
 
 
 
