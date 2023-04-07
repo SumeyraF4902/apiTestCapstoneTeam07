@@ -36,8 +36,6 @@ public class Login {
          token = path.getString("access_token");
         System.out.println("Token: " + token);
         driver.quit();
-
-
     }
 
 }
