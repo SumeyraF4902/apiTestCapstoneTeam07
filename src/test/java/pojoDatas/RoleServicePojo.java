@@ -136,5 +136,6 @@ public class RoleServicePojo {
                 ", name='" + name + '\'' +
                 ", app_id=" + app_id +
                 '}';
+
     }
 }
