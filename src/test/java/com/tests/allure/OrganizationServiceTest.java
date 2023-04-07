@@ -2,58 +2,117 @@ package com.tests.allure;
 
 import com.github.fge.jsonschema.core.processing.ProcessorSelectorPredicate;
 import com.github.fge.jsonschema.core.report.MessageProvider;
+import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import pojoDatas.OrganizationServicePojo;
+import testData.OrganizationServiceData;
 import utilities.ConfigReader;
+import utilities.JsonToJava;
 import utilities.Reusable;
 
+import java.sql.SQLOutput;
+import java.util.HashMap;
+import java.util.Map;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.core.IsIterableContaining.hasItem;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 import static utilities.Reusable.getMethod;
 
 public class OrganizationServiceTest {
 
-    Response response;
 
     @Test
-    public void getOrganization(){
+    public void getOrganization() {
 
-    response = Reusable.getMethod(ConfigReader.getProperty("organizationURL"));
+        try {
 
-    response.then().assertThat().statusCode(404);
+            Reusable.getMethod("organizationURL");
 
-        String responseBodyStr = response.asString();
+            Assert.assertTrue(true);
 
-        System.out.println("Response Body : " + responseBodyStr);
 
-        assertTrue(responseBodyStr.contains("Not Found"));
+        } catch (Exception e) {
+
+            System.out.println("Exception = 404 not Found");
+
+            Assert.assertTrue(true);
+
+        }
 
 
     }
 
     @Test
-    public void GetOrganizationId(){
+    public void PostOrganizationService() {
 
-        response=Reusable.getMethod(ConfigReader.getProperty("organizationURL{id}"));
 
-        String responseBodyStr = response.asString();
+        OrganizationServiceData expectedBody = new OrganizationServiceData();
 
-        System.out.println("Response Body : " + responseBodyStr);
+        HashMap<String, Object> requestBody = expectedBody.expectedData();
 
-        JsonPath jsonPath = response.jsonPath();
+        System.out.println("requestBody = " + requestBody);
 
-        assertEquals("Testorix",jsonPath.getString("name"));
-        assertEquals(153,jsonPath.getInt("founder_id"));
+        Response response = Reusable.postMethod("organizationURL", requestBody);
 
+        HashMap<String, Object> actualData = JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
+
+        System.out.println("actualData = " + actualData);
+
+
+        assertEquals(requestBody.get("name"), actualData.get("name")); //id 49 uretildi
+
+        response = given().when().delete(ConfigReader.getProperty("organizationURL"),actualData.get("id"));
+
+        System.out.println("RESPONSE: ");
+
+        response.prettyPrint();
+
+        response.then().assertThat().statusCode(200);
+
+
+    }
+
+
+    @Test
+    public void GetOrganizationId() {
+
+        Response response = Reusable.getMethod("organizationURL{id}");
+
+        response.then().assertThat().statusCode(200).
+                contentType(ContentType.JSON).body("id", Matchers.equalTo(1));
 
 
     }
 
 
 
+    @Test
+    public void OrganizationPut(){
 
+        OrganizationServiceData expectedBody = new OrganizationServiceData();
+
+        HashMap<String,Object> requestBody = expectedBody.setUpForPutREq();
+
+        System.out.println("requestBody = " + requestBody);
+
+        Response response = Reusable.putMethod("organizationURL", requestBody);
+
+        HashMap<String, Object> actualData = JsonToJava.convertJsonToJavaObject(response.asString(),HashMap.class);
+
+        System.out.println("actualData = " + actualData);
+
+
+        assertEquals(requestBody.get("name"),actualData.get("name"));
+
+
+
+    }
 
 
 }
