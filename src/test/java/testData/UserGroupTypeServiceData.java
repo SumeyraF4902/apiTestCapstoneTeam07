@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class UserGroupTypeServiceData {
 
+
     public Map<String, Object> expectedDataSetUp(String name, String description) {
         Map<String, Object> expectedDataMap = new HashMap<String, Object>();
         expectedDataMap.put("name", name);

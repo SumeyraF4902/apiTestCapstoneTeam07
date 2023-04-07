@@ -1,5 +1,3 @@
 !/allure-results/
-!/config.properties
-!/config.properties
-!/.gitignore
-!/src/test/java/pages/Login.java
+
+
