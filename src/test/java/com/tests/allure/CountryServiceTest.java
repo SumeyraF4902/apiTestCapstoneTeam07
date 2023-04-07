@@ -14,16 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 
-public class CountryServiceTest {
+public class CountryServiceTest extends Login{
 
-    public static Login login = new Login();
-
-    public static String token;
-
-    @BeforeClass
-    public void getToken(){
-       token = login.beToken();
-    }
 
 
     @org.testng.annotations.Test
@@ -31,7 +23,7 @@ public class CountryServiceTest {
 
 
 
-        Response response = Reusable.getMethod("countryURL", token);
+        Response response = Reusable.getMethod("countryURL");
 
         response.then().assertThat().statusCode(200);
 
@@ -47,11 +39,9 @@ public class CountryServiceTest {
     public void getIDCountry(){
 
 
-        Response response = Reusable.getMethod("germanyURL", token);
+        Response response = Reusable.getMethod("germanyURL");
 
         response.then().assertThat().statusCode(200);
-
-       // CountryServicePojo expectedData = new CountryServicePojo("DE","Germany","EUR","Euro","���");
 
         Map<String,String> actualDataMap= JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
 
@@ -72,7 +62,7 @@ public class CountryServiceTest {
 
         try {
 
-            Reusable.getMethod("nonCountryURL", token);
+            Reusable.getMethod("nonCountryURL");
 
                 Assert.assertTrue(true);
 

@@ -13,16 +13,14 @@ import static io.restassured.RestAssured.given;
 
 public class Reusable {
 
-
-
-    public static Response getMethod(String url,String token){
+    public static Response getMethod(String url){
 
 
 
         Response response=given().
                 accept(ContentType.JSON).
                 when().
-                auth().preemptive().oauth2(token).
+                auth().preemptive().oauth2(Login.token).
                 get(ConfigReader.getProperty(url)).
                 then().
                 extract().
@@ -33,7 +31,7 @@ public class Reusable {
 
     }
 
-    public static Response putMethod(String url, Object expectedBody,String token){
+    public static Response putMethod(String url, Object expectedBody){
 
 
 
@@ -41,7 +39,7 @@ public class Reusable {
                 contentType(ContentType.JSON).
                 accept(ContentType.JSON).
                 when().
-                auth().preemptive().oauth2(token).
+                auth().preemptive().oauth2(Login.token).
                 body(expectedBody).
                 put(ConfigReader.getProperty(url)).
                 then().
@@ -53,14 +51,14 @@ public class Reusable {
 
     }
 
-    public static Response postMethod(String url, Object expectedBody, String token){
+    public static Response postMethod(String url, Object expectedBody){
 
 
 
         Response response=given().
                 accept(ContentType.JSON).
                 when().
-                auth().preemptive().oauth2(token).
+                auth().preemptive().oauth2(Login.token).
                 contentType(ContentType.JSON).
                 body(expectedBody).
                 post(ConfigReader.getProperty(url)).
@@ -74,14 +72,14 @@ public class Reusable {
 
     }
 
-    public static Response deleteMethod(String url, int id, String token){
+    public static Response deleteMethod(String url, int id){
 
 
 
         Response response=given().
                 accept(ContentType.JSON).
                 when().
-                auth().preemptive().oauth2(token).
+                auth().preemptive().oauth2(Login.token).
                 delete(ConfigReader.getProperty(url)+"/"+id).
                 then().
                 extract().
@@ -91,14 +89,14 @@ public class Reusable {
         return response;
 
     }
-    public static Response getIDMethod(String url,String token,String id){
+    public static Response getIDMethod(String url,String id){
 
 
 
         Response response=given().
                 accept(ContentType.JSON).
                 when().
-                auth().preemptive().oauth2(token).
+                auth().preemptive().oauth2(Login.token).
                 get(ConfigReader.getProperty(url)+"/"+id).
                 then().
                 extract().
