@@ -9,20 +9,19 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeClass;
 
 
-public class Login {
+public class LoginCustomer {
 
-    private String username = "bo@testorix.com";
+    private String username = "cstm@testorix.com";
 
     private String password = "6121.Bkr";
 
-    public static String token;
 
-
-    public Login() {
+    public LoginCustomer() {
 
     }
+
     @BeforeClass
-    public void beToken(){
+    public String beToken(){
         WebDriverManager.chromedriver().setup();
         ChromeOptions opt = new ChromeOptions().setHeadless(true);
         opt.addArguments("--remote-allow-origins=*");
@@ -33,9 +32,11 @@ public class Login {
         driver.findElement(By.tagName("button")).click();
         driver.navigate().to("https://qa-gm3.quaspareparts.com/auth/userinfo");
         JsonPath path = new JsonPath(driver.findElement(By.tagName("body")).getText());
-         token = path.getString("access_token");
+        String token = path.getString("access_token");
         System.out.println("Token: " + token);
         driver.quit();
+        return token;
+
     }
 
 }
