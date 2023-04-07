@@ -13,17 +13,16 @@ import static io.restassured.RestAssured.given;
 
 public class Reusable {
 
-   public static Login login = new Login(Driver.getDriver());
 
 
-    public static Response getMethod(String url){
+    public static Response getMethod(String url,String token){
 
 
-        login.beToken();
+
         Response response=given().
                 accept(ContentType.JSON).
                 when().
-                auth().preemptive().oauth2(login.getToken()).
+                auth().preemptive().oauth2(token).
                 get(ConfigReader.getProperty(url)).
                 then().
                 extract().
@@ -34,15 +33,15 @@ public class Reusable {
 
     }
 
-    public static Response putMethod(String url, Object expectedBody){
+    public static Response putMethod(String url, Object expectedBody,String token){
 
 
-        login.beToken();
+
         Response response=given().
                 contentType(ContentType.JSON).
                 accept(ContentType.JSON).
                 when().
-                auth().preemptive().oauth2(login.getToken()).
+                auth().preemptive().oauth2(token).
                 body(expectedBody).
                 put(ConfigReader.getProperty(url)).
                 then().
@@ -54,15 +53,15 @@ public class Reusable {
 
     }
 
-    public static Response postMethod(String url, Object expectedBody){
+    public static Response postMethod(String url, Object expectedBody, String token){
 
 
-        login.beToken();
+
         Response response=given().
-                contentType(ContentType.JSON).
                 accept(ContentType.JSON).
                 when().
-                auth().preemptive().oauth2(login.getToken()).
+                auth().preemptive().oauth2(token).
+                contentType(ContentType.JSON).
                 body(expectedBody).
                 post(ConfigReader.getProperty(url)).
                 then().
@@ -75,19 +74,36 @@ public class Reusable {
 
     }
 
-    public static Response deleteMethod(String url, int id){
+    public static Response deleteMethod(String url, int id, String token){
 
 
-        login.beToken();
+
         Response response=given().
                 accept(ContentType.JSON).
                 when().
-                auth().preemptive().oauth2(login.getToken()).
+                auth().preemptive().oauth2(token).
                 delete(ConfigReader.getProperty(url)+"/"+id).
                 then().
                 extract().
                 response();
 
+
+        return response;
+
+    }
+    public static Response getIDMethod(String url,String token,String id){
+
+
+
+        Response response=given().
+                accept(ContentType.JSON).
+                when().
+                auth().preemptive().oauth2(token).
+                get(ConfigReader.getProperty(url)+"/"+id).
+                then().
+                extract().
+                response();
+        response.prettyPrint();
 
         return response;
 
