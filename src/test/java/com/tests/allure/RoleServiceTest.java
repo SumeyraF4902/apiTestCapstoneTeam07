@@ -110,11 +110,15 @@ public class RoleServiceTest {
     public void getRolesList(){
 
         Response response= Reusable.getMethod("rolesURL");
+
         response.then().assertThat().statusCode(200).contentType(ContentType.JSON).
                 body("id",hasItem(17),"name",hasItems("A3M_ADMIN","Accountant","APP_DOMAIN_MANAGER",
                         "Customer","Guest","Logistics Manager","Logistics Personnel", "Purchase Manager",
                         "Purchase Personnel","Quality Controller","Quality Manager", "Sales Manager","Sales Personnel",
                         "Store Manager","Warehouse Manager","Warehouse Personnel", "Business Owner"));
+
+        response.then().assertThat().statusCode(200).contentType(ContentType.JSON);
+
 
 
 
