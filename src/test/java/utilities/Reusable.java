@@ -72,7 +72,7 @@ public class Reusable {
 
     }
 
-    public static Response deleteMethod(String url, int id){
+    public static Response deleteMethod(String url, Integer id){
 
 
 
@@ -89,7 +89,7 @@ public class Reusable {
         return response;
 
     }
-    public static Response getIDMethod(String url,String id){
+    public static Response getIDMethod(String url,Integer id){
 
 
 

@@ -19,17 +19,19 @@ public class UserStatusServiceTest extends Login{
 
 
 
-
+  public static  UserStatusServiceData serviceData = new UserStatusServiceData();
 
     public static Response responsePost;
+
+    public static Integer id;
 
 
     @Test
     public void apostUserStatusService(){
 
-        UserStatusServiceData serviceData = new UserStatusServiceData();
 
-        Map<String,String> reqBody = serviceData.setupDataUserStatus();
+
+        Map<String,Object> reqBody = serviceData.setupDataUserStatus();
 
         System.out.println("reqBody = " + reqBody);
 
@@ -43,9 +45,9 @@ public class UserStatusServiceTest extends Login{
     @Test
     public void getIDUserStatusService(){
 
-        String id = responsePost.jsonPath().getString("id");
+         id = Integer.valueOf(responsePost.jsonPath().getString("id"));
 
-       Response response = Reusable.getIDMethod("userStatusPost",id);
+       Response response = Reusable.getIDMethod("userStatusPost", id);
 
         response.then().assertThat().statusCode(200);
 
@@ -58,5 +60,32 @@ public class UserStatusServiceTest extends Login{
         }
 
     }
+
+    @Test
+    public void putUserStatusService(){
+
+        Map<String,Object> reqBody = serviceData.putDataUserStatus();
+
+        reqBody.put("id",id);
+
+
+        Response response = Reusable.putMethod("userStatusPost",reqBody);
+
+        response.then().assertThat().statusCode(200);
+
+        Map<String,Object> actualDataMap = JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
+
+
+
+        for (String key: reqBody.keySet()){
+            Assert.assertEquals(actualDataMap.get(key),reqBody.get(key));
+        }
+
+    }
+
+
+
+
+
 
 }
