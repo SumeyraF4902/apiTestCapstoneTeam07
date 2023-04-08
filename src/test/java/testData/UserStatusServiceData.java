@@ -24,8 +24,10 @@ public class UserStatusServiceData {
 
         expectedDataMap = new HashMap<>();
 
-        expectedDataMap.put("name","faker.name()");
-        expectedDataMap.put("description","User account is active");
+
+
+        expectedDataMap.put("name",faker.name().title());
+        expectedDataMap.put("description",faker.howIMetYourMother().character());
 
 
         return expectedDataMap;
@@ -40,8 +42,37 @@ public class UserStatusServiceData {
         expectedDataMap = new HashMap<>();
 
 
-        expectedDataMap.put("name","faker.name()1");
+        expectedDataMap.put("name",faker.name().title());
+        expectedDataMap.put("description",faker.howIMetYourMother().highFive());
+
+
+        return expectedDataMap;
+
+
+    }
+    public Map<String,Object> setupNegativeDataUserStatus(){
+
+        expectedDataMap = new HashMap<>();
+
+
+
+        expectedDataMap.put("name","");
         expectedDataMap.put("description","User account is active");
+
+
+        return expectedDataMap;
+
+
+    }
+
+    public Map<String,Object> setupIDDataUserStatus(){
+
+        expectedDataMap = new HashMap<>();
+
+
+        expectedDataMap.put("id",faker.number().randomDigit());
+        expectedDataMap.put("name",faker.name().title());
+        expectedDataMap.put("description",faker.howIMetYourMother().character());
 
 
         return expectedDataMap;
