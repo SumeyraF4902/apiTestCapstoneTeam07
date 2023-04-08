@@ -106,7 +106,6 @@ public class RoleServiceTest {
 
     @Test
 
-
     public void getRolesList(){
 
         Response response= Reusable.getMethod("rolesURL");
