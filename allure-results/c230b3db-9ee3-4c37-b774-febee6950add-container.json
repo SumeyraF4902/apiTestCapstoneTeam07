@@ -1,1 +1,0 @@
-{"uuid":"c230b3db-9ee3-4c37-b774-febee6950add","name":"com.tests.allure.UserGroupTypeServiceTest","children":["dfd848ae-210a-4dbc-b41e-1776ebaef32b"],"befores":[{"name":"beToken","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1680906640714,"stop":1680906654007}],"afters":[],"start":1680906640525,"stop":1680906658084}
