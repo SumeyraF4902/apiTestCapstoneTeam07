@@ -108,7 +108,6 @@ public class RoleServiceTest extends Login {
 
     @Test
 
-
     public void getRolesList(){
 
         Response response= Reusable.getMethod("rolesURL");
