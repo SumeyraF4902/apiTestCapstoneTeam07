@@ -9,7 +9,7 @@ public class OrganizationServiceData {
     /*
      {
       "id": 1,
-      "name": "TEAM00767",
+      "name": "Acme01",
       "founder_id": 2,
       "short_name": "team",
       "address": "Ronald Avenue McMillan Drive No. 5, Tysons, Virginia",
@@ -30,7 +30,7 @@ public class OrganizationServiceData {
 
 
      expectedData.put("id",null);
-     expectedData.put("name","Acme071");
+     expectedData.put("name","Acme07123");
      expectedData.put("founder_id",2);
      expectedData.put("short_name","team");
      expectedData.put("address","Ronald Avenue McMillan Drive No. 5, Tysons, Virginia");
