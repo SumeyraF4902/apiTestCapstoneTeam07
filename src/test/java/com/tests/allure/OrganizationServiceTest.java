@@ -8,6 +8,7 @@ import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.Login;
 import pojoDatas.OrganizationServicePojo;
 import testData.OrganizationServiceData;
 import utilities.ConfigReader;
@@ -24,7 +25,7 @@ import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 import static utilities.Reusable.getMethod;
 
-public class OrganizationServiceTest {
+public class OrganizationServiceTest extends Login {
 
 
     @Test
@@ -65,16 +66,13 @@ public class OrganizationServiceTest {
         System.out.println("actualData = " + actualData);
 
 
-        assertEquals(requestBody.get("name"), actualData.get("name")); //id 49 uretildi
+        assertEquals(requestBody.get("name"), actualData.get("name"));
 
-        response = given().when().delete(ConfigReader.getProperty("organizationURL"),actualData.get("id"));
+        int id = (int) actualData.get("id");
 
-        System.out.println("RESPONSE: ");
-
-        response.prettyPrint();
+        response = Reusable.deleteMethod("organizationURL",id);
 
         response.then().assertThat().statusCode(200);
-
 
     }
 
@@ -101,7 +99,7 @@ public class OrganizationServiceTest {
 
         System.out.println("requestBody = " + requestBody);
 
-        Response response = Reusable.putMethod("organizationURL", requestBody);
+        Response response = Reusable.putMethod("organization", requestBody);
 
         HashMap<String, Object> actualData = JsonToJava.convertJsonToJavaObject(response.asString(),HashMap.class);
 

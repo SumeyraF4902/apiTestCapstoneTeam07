@@ -7,6 +7,7 @@ import io.restassured.response.Response;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.Login;
 import pojoDatas.UserGroupTypeServicePojo;
 import testData.UserGroupTypeServiceData;
 import utilities.Reusable;
@@ -19,7 +20,7 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.testng.Assert.assertEquals;
 
 
-public class UserGroupTypeServiceTest {
+public class UserGroupTypeServiceTest extends Login {
 
 
     @org.testng.annotations.Test
