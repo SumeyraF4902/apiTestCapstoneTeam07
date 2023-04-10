@@ -1,1 +1,0 @@
-{"uuid":"1c419d8a-3e58-463f-aa3a-235aa77d6500","name":"com.tests.allure.CountryServiceTest","children":["9e27f8b2-ebb9-4a4d-8770-f8e55184b568"],"befores":[{"name":"beToken","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1681139550991,"stop":1681139566562}],"afters":[],"start":1681139550913,"stop":1681139568849}
