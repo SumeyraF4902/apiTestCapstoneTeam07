@@ -98,20 +98,14 @@ public class MembershipServiceTest extends Login {
     public void TC07PutRoleNegative() {
         data = new MembershipServiceData();
         Map<String, Object> expectedData = data.expectedDataRole(2, 332, "5dbc8b45-956a-4eaa-bb1f-3411730b7452", 6, false);
-        try {
-
-            Reusable.putMethod("putMembershipServiceRoleUrl", expectedData);
-
-            Assert.assertTrue(false);
 
 
-        }catch (Exception e){
+            Response response = Reusable.putMethod("putMembershipServiceRoleUrl", expectedData);
 
-            System.out.println("Exception = 404 not Found");
+           response.then().assertThat().statusCode(404);
 
-            Assert.assertTrue(true);
 
-        }
+
     }
 
 
