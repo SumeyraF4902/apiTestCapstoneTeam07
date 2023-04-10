@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  <meta charset='utf-8'>
+  <title>TestNG reports</title>
+
+    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra" />
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" id="retro" disabled="false"/>
+    <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="testng-reports.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
+    </script>
+    <!--
+      <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+     -->
+  </head>
+
+  <body>    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
+      <br/>
+      <span class="top-banner-font-1">1 suite, 2 failed tests</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
+        <span>All suites</span>
+        <a href="#" title="Collapse/expand all the suites" class="collapse-all-link">
+          <img src="collapseall.gif" class="collapse-all-icon">
+          </img> <!-- collapse-all-icon -->
+        </a> <!-- collapse-all-link -->
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
+        <div class="rounded-window">
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" panel-name="suite-Test_Suite" class="navigator-link">
+              <span class="suite-name border-failed">Test Suite</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" panel-name="test-xml-Test_Suite" class="navigator-link ">
+                    <span>C:\Users\hp\IdeaProjects\capstoneTeam07ApiProject\testng.xml</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="testlist-Test_Suite" class="navigator-link ">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="group-Test_Suite" class="navigator-link ">
+                    <span>0 groups</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="times-Test_Suite" class="navigator-link ">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="reporter-Test_Suite" class="navigator-link ">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="ignored-methods-Test_Suite" class="navigator-link ">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="chronological-Test_Suite" class="navigator-link ">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">13 methods, 2 failed,   11 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Test_Suite" class="hide-methods failed suite-Test_Suite"> (hide)</a> <!-- hide-methods failed suite-Test_Suite -->
+                      <a href="#" panel-name="suite-Test_Suite" class="show-methods failed suite-Test_Suite"> (show)</a> <!-- show-methods failed suite-Test_Suite -->
+                    </span>
+                    <div class="method-list-content failed suite-Test_Suite">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test_Suite" title="com.tests.allure.UserStatusServiceTest" class="method navigator-link" hash-for-method="deleteUserStatusService">deleteUserStatusService</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test_Suite" title="com.tests.allure.CountryServiceTest" class="method navigator-link" hash-for-method="getNonIDCountry">getNonIDCountry</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Test_Suite -->
+                  </li>
+                  <li>
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Test_Suite" class="hide-methods passed suite-Test_Suite"> (hide)</a> <!-- hide-methods passed suite-Test_Suite -->
+                      <a href="#" panel-name="suite-Test_Suite" class="show-methods passed suite-Test_Suite"> (show)</a> <!-- show-methods passed suite-Test_Suite -->
+                    </span>
+                    <div class="method-list-content passed suite-Test_Suite">
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test_Suite" title="com.tests.allure.CountryServiceTest" class="method navigator-link" hash-for-method="getAllCountry">getAllCountry</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test_Suite" title="com.tests.allure.CountryServiceTest" class="method navigator-link" hash-for-method="getIDCountry">getIDCountry</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test_Suite" title="com.tests.allure.UserStatusServiceTest" class="method navigator-link" hash-for-method="getIDUserStatusService">getIDUserStatusService</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test_Suite" title="com.tests.allure.UserStatusServiceTest" class="method navigator-link" hash-for-method="getUserStatusService">getUserStatusService</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test_Suite" title="com.tests.allure.UserStatusServiceTest" class="method navigator-link" hash-for-method="negativePostNameIsSpaceUserStatusService">negativePostNameIsSpaceUserStatusService</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test_Suite" title="com.tests.allure.UserStatusServiceTest" class="method navigator-link" hash-for-method="negativePostNotDescriptionUserStatusService">negativePostNotDescriptionUserStatusService</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test_Suite" title="com.tests.allure.UserStatusServiceTest" class="method navigator-link" hash-for-method="negativePostUserIDStatusService">negativePostUserIDStatusService</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test_Suite" title="com.tests.allure.UserStatusServiceTest" class="method navigator-link" hash-for-method="negativePostUserStatusService">negativePostUserStatusService</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test_Suite" title="com.tests.allure.UserStatusServiceTest" class="method navigator-link" hash-for-method="negativePutUserStatusService">negativePutUserStatusService</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test_Suite" title="com.tests.allure.UserStatusServiceTest" class="method navigator-link" hash-for-method="postUserStatusService">postUserStatusService</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Test_Suite" title="com.tests.allure.UserStatusServiceTest" class="method navigator-link" hash-for-method="putUserStatusService">putUserStatusService</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Test_Suite -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
+        </div> <!-- rounded-window -->
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-Test_Suite" class="panel Test_Suite">
+          <div class="suite-Test_Suite-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">com.tests.allure.CountryServiceTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="getNonIDCountry">
+                  </a> <!-- getNonIDCountry -->
+                  <span class="method-name">getNonIDCountry</span>
+                  <div class="stack-trace">java.lang.AssertionError: Country Bulundu  expected [false] but found [true]
+	at com.tests.allure.CountryServiceTest.getNonIDCountry(CountryServiceTest.java:67)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+... Removed 39 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Test_Suite-class-failed -->
+          <div class="suite-Test_Suite-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">com.tests.allure.UserStatusServiceTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="deleteUserStatusService">
+                  </a> <!-- deleteUserStatusService -->
+                  <span class="method-name">deleteUserStatusService</span>
+                  <div class="stack-trace">java.lang.AssertionError: User Status Bulundu  expected [false] but found [true]
+	at com.tests.allure.UserStatusServiceTest.deleteUserStatusService(UserStatusServiceTest.java:147)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+... Removed 39 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Test_Suite-class-failed -->
+          <div class="suite-Test_Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.tests.allure.CountryServiceTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="getAllCountry">
+                  </a> <!-- getAllCountry -->
+                  <span class="method-name">getAllCountry</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="getIDCountry">
+                  </a> <!-- getIDCountry -->
+                  <span class="method-name">getIDCountry</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Test_Suite-class-passed -->
+          <div class="suite-Test_Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.tests.allure.UserStatusServiceTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="getIDUserStatusService">
+                  </a> <!-- getIDUserStatusService -->
+                  <span class="method-name">getIDUserStatusService</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="getUserStatusService">
+                  </a> <!-- getUserStatusService -->
+                  <span class="method-name">getUserStatusService</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="negativePostNameIsSpaceUserStatusService">
+                  </a> <!-- negativePostNameIsSpaceUserStatusService -->
+                  <span class="method-name">negativePostNameIsSpaceUserStatusService</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="negativePostNotDescriptionUserStatusService">
+                  </a> <!-- negativePostNotDescriptionUserStatusService -->
+                  <span class="method-name">negativePostNotDescriptionUserStatusService</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="negativePostUserIDStatusService">
+                  </a> <!-- negativePostUserIDStatusService -->
+                  <span class="method-name">negativePostUserIDStatusService</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="negativePostUserStatusService">
+                  </a> <!-- negativePostUserStatusService -->
+                  <span class="method-name">negativePostUserStatusService</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="negativePutUserStatusService">
+                  </a> <!-- negativePutUserStatusService -->
+                  <span class="method-name">negativePutUserStatusService</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="postUserStatusService">
+                  </a> <!-- postUserStatusService -->
+                  <span class="method-name">postUserStatusService</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="putUserStatusService">
+                  </a> <!-- putUserStatusService -->
+                  <span class="method-name">putUserStatusService</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Test_Suite-class-passed -->
+        </div> <!-- panel Test_Suite -->
+        <div panel-name="test-xml-Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">C:\Users\hp\IdeaProjects\capstoneTeam07ApiProject\testng.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite name=&quot;Test Suite&quot; guice-stage=&quot;DEVELOPMENT&quot; verbose=&quot;0&quot;&gt;
+  &lt;test thread-count=&quot;5&quot; name=&quot;User Tests&quot; verbose=&quot;0&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.tests.allure.CountryServiceTest&quot;/&gt;
+      &lt;class name=&quot;com.tests.allure.UserStatusServiceTest&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- User Tests --&gt;
+&lt;/suite&gt; &lt;!-- Test Suite --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Test Suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">User Tests (2 classes)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Test Suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Test Suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Test_Suite');
+function tableData_Test_Suite() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(13);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'deleteUserStatusService')
+data.setCell(0, 2, 'com.tests.allure.UserStatusServiceTest')
+data.setCell(0, 3, 3442);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'getAllCountry')
+data.setCell(1, 2, 'com.tests.allure.CountryServiceTest')
+data.setCell(1, 3, 2719);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'putUserStatusService')
+data.setCell(2, 2, 'com.tests.allure.UserStatusServiceTest')
+data.setCell(2, 3, 2680);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'negativePutUserStatusService')
+data.setCell(3, 2, 'com.tests.allure.UserStatusServiceTest')
+data.setCell(3, 3, 2669);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'postUserStatusService')
+data.setCell(4, 2, 'com.tests.allure.UserStatusServiceTest')
+data.setCell(4, 3, 2650);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'negativePostNotDescriptionUserStatusService')
+data.setCell(5, 2, 'com.tests.allure.UserStatusServiceTest')
+data.setCell(5, 3, 1810);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'negativePostNameIsSpaceUserStatusService')
+data.setCell(6, 2, 'com.tests.allure.UserStatusServiceTest')
+data.setCell(6, 3, 1756);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'getIDUserStatusService')
+data.setCell(7, 2, 'com.tests.allure.UserStatusServiceTest')
+data.setCell(7, 3, 1743);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'getIDCountry')
+data.setCell(8, 2, 'com.tests.allure.CountryServiceTest')
+data.setCell(8, 3, 1310);
+data.setCell(9, 0, 9)
+data.setCell(9, 1, 'getUserStatusService')
+data.setCell(9, 2, 'com.tests.allure.UserStatusServiceTest')
+data.setCell(9, 3, 1059);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'getNonIDCountry')
+data.setCell(10, 2, 'com.tests.allure.CountryServiceTest')
+data.setCell(10, 3, 919);
+data.setCell(11, 0, 11)
+data.setCell(11, 1, 'negativePostUserIDStatusService')
+data.setCell(11, 2, 'com.tests.allure.UserStatusServiceTest')
+data.setCell(11, 3, 886);
+data.setCell(12, 0, 12)
+data.setCell(12, 1, 'negativePostUserStatusService')
+data.setCell(12, 2, 'com.tests.allure.UserStatusServiceTest')
+data.setCell(12, 3, 875);
+window.suiteTableData['Test_Suite']= { tableData: data, tableDiv: 'times-div-Test_Suite'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 24 seconds</span>
+              <div id="times-div-Test_Suite">
+              </div> <!-- times-div-Test_Suite -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Test Suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.tests.allure.CountryServiceTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">beToken</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="test-method">
+                <span class="method-name">getAllCountry</span>
+                <span class="method-start">14674 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">getIDCountry</span>
+                <span class="method-start">17731 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">getNonIDCountry</span>
+                <span class="method-start">19045 ms</span>
+              </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.tests.allure.UserStatusServiceTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">beToken</span>
+                <span class="method-start">19971 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">deleteUserStatusService</span>
+                <span class="method-start">27390 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">getIDUserStatusService</span>
+                <span class="method-start">30846 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">getUserStatusService</span>
+                <span class="method-start">32594 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">negativePostNameIsSpaceUserStatusService</span>
+                <span class="method-start">33657 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">negativePostNotDescriptionUserStatusService</span>
+                <span class="method-start">35424 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">negativePostUserIDStatusService</span>
+                <span class="method-start">37236 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">negativePostUserStatusService</span>
+                <span class="method-start">38124 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">negativePutUserStatusService</span>
+                <span class="method-start">39002 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">postUserStatusService</span>
+                <span class="method-start">41673 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">putUserStatusService</span>
+                <span class="method-start">44330 ms</span>
+              </div> <!-- test-method -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
+    </div> <!-- wrapper -->
+  </body>
+<script type="text/javascript" src="testng-reports2.js"></script>
+</html>
