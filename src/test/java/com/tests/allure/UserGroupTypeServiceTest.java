@@ -1,15 +1,20 @@
 package com.tests.allure;
 
+
+import com.github.javafaker.Faker;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.google.gson.Gson;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Login;
 import pojoDatas.UserGroupTypeServicePojo;
 import testData.UserGroupTypeServiceData;
+import utilities.JsonToJava;
 import utilities.Reusable;
 
 import java.io.IOException;
@@ -22,8 +27,11 @@ import static org.testng.Assert.assertEquals;
 
 public class UserGroupTypeServiceTest extends Login {
 
+    UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
+    Faker faker = new Faker();
 
-    @org.testng.annotations.Test
+    /* TÜM GET */
+    @Test
     public void getTestAllUserGroupType() {
         Response response = Reusable.getMethod("userGroupTypeURL");
 
@@ -34,28 +42,70 @@ public class UserGroupTypeServiceTest extends Login {
                 contentType(ContentType.JSON).
                 body("id", hasItems(1, 2, 3),
                         "name", hasItems("Team", "Remote Unit", "Department"));
+    }
 
+
+    /* ID Lİ GET */
+    @Test
+    public void getTestUserGroupTypeById() {
+
+        Map<String, Object> requestBody = testData.expectedDataSetUp(faker.company().industry(), faker.company().catchPhrase());
+
+        Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
+        Map<String, Object> actualBody = response.as(HashMap.class);
+        Integer id = (Integer) actualBody.get("id");
+        Reusable.deleteMethod("userGroupTypeURL", id);
+
+        response = Reusable.getIDMethod("userGroupTypeURL", id);
+        response.then().assertThat().statusCode(404);
+    }
+
+    /* ID SİZ GET */
+    @Test
+    public void getTestUserGroupTypeByNoId() {
+
+        Map<String, Object> requestBody = testData.expectedDataSetUp(faker.company().industry(), faker.company().catchPhrase());
+
+        Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
+        Map<String, Object> actualBody = response.as(HashMap.class);
+        Integer id = (Integer) actualBody.get("id");
+        Reusable.deleteMethod("userGroupTypeURL", id);
+
+        response = Reusable.getIDMethod("userGroupTypeURL", id);
+        response.then().assertThat().statusCode(404);
     }
 
     @org.testng.annotations.Test
     public void postTestAddNewUserType() {
-      //  UserGroupTypeServicePojo requestBody = new UserGroupTypeServicePojo("Group07", "Students");
+
         UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
-        Map<String,Object> requestBody= testData.expectedDataSetUp("Group07", "Students");
+        Map<String, Object> requestBody = testData.expectedDataSetUp("Group07", "Students");
 
-        Response response = Reusable.postMethod("userGroupTypeURL",requestBody );
+        Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
 
-        Map<String,Object> actualBody = response.as(HashMap.class);
+        Map<String, Object> actualBody = response.as(HashMap.class);
 
-        assertEquals(requestBody.get("name"),actualBody.get("name"));
+        assertEquals(requestBody.get("name"), actualBody.get("name"));
         assertEquals(requestBody.get("description"), actualBody.get("description"));
+
+        Reusable.deleteMethod("userGroupTypeURL", actualBody.get("id"));
+        try {
+            Reusable.getIDMethod("userGroupTypeURL", actualBody.get("id"));
+            Assert.assertTrue(false);
+
+        } catch (Exception e) {
+            System.out.println("Exception = 404 not Found");
+            Assert.assertTrue(true);
+        }
+
 
     }
 
-    @org.testng.annotations.Test
+    @Test
     public void postTestAddNewUserTypeWithID() {
 
-        UserGroupTypeServicePojo requestBody = new UserGroupTypeServicePojo(77, "Education07", "Organization of Education");
+        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
+        Map<String, Object> requestBody = testData.expectedDataIdSetUp(77, "Education07", "Organization of Education");
 
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
         response.
@@ -64,9 +114,11 @@ public class UserGroupTypeServiceTest extends Login {
                 statusCode(406);
     }
 
-    @org.testng.annotations.Test
+    @Test
     public void postTestAddNewUserTypeWithEmptyName() {
-        UserGroupTypeServicePojo requestBody = new UserGroupTypeServicePojo(null, "", "Organization of Education");
+
+        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
+        Map<String, Object> requestBody = testData.expectedDataSetUp("", "Organization of Education");
 
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
         response.
@@ -77,9 +129,8 @@ public class UserGroupTypeServiceTest extends Login {
 
     @Test
     public void postTestAddNewUserTypeWith3SpaceName() {
-        // UserGroupTypeServicePojo requestBody = new UserGroupTypeServicePojo(null, "   ", "Space Character");
         UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
-        Map<String,Object> requestBody= testData.expectedDataSetUp("   ", "Space Character");
+        Map<String, Object> requestBody = testData.expectedDataSetUp("   ", "Space Character");
 
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
 
@@ -89,7 +140,7 @@ public class UserGroupTypeServiceTest extends Login {
         assertEquals(requestBody.get("name"), actualBody.getString("name"));
         assertEquals(requestBody.get("description"), actualBody.getString("description"));
 
-
+        Reusable.deleteMethod("userGroupTypeURL", actualBody.get("id"));
     }
 
 
@@ -97,24 +148,23 @@ public class UserGroupTypeServiceTest extends Login {
     public void postTestAddNewUserTypeWithSpecialCharacterName() {
 
         UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
-        Map<String,Object> requestBody= testData.expectedDataSetUp("?*/%", "Special Character");
+        Map<String, Object> requestBody = testData.expectedDataSetUp("?*/%", "Special Character");
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
 
-        Gson gson = new Gson();
-        Map<String,Object>  actualBody = gson.fromJson(response.asString(),HashMap.class);
+        Map<String, Object> actualBody = response.as(HashMap.class);
 
         response.then().assertThat().statusCode(201);
         assertEquals(requestBody.get("name"), actualBody.get("name"));
         assertEquals(requestBody.get("description"), actualBody.get("description"));
 
-
+        Reusable.deleteMethod("userGroupTypeURL", actualBody.get("id"));
     }
 
-    @org.testng.annotations.Test
+    @Test
     public void postTestAddNewUserTypeWithNumericCharacterName() {
 
         UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
-        Map<String,Object> requestBody= testData.expectedDataSetUp("12345", "Numeric Character");
+        Map<String, Object> requestBody = testData.expectedDataSetUp("12345", "Numeric Character");
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
 
         JsonPath actualBody = response.jsonPath();
@@ -123,53 +173,65 @@ public class UserGroupTypeServiceTest extends Login {
         assertEquals(requestBody.get("name"), actualBody.getString("name"));
         assertEquals(requestBody.get("description"), actualBody.getString("description"));
 
-
+        Reusable.deleteMethod("userGroupTypeURL", actualBody.get("id"));
     }
 
-    @org.testng.annotations.Test
+    @Test
     public void postTestAddNewUserTypeWithEmptyDescription() {
-        UserGroupTypeServicePojo requestBody = new UserGroupTypeServicePojo( "Edu07", null);
+        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
+        Map<String, Object> requestBody = testData.expectedDataSetUp("Edu07", null);
 
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
 
-        UserGroupTypeServicePojo actualBody = response.as(UserGroupTypeServicePojo.class);
+        Map<String, Object> actualBody = response.as(HashMap.class);
 
         response.then().assertThat().statusCode(201);
-        assertEquals(requestBody.getName(), actualBody.getName());
-        assertEquals(requestBody.getDescription(), actualBody.getDescription());
+        assertEquals(requestBody.get("name"), actualBody.get("name"));
+        assertEquals(requestBody.get("decsription"), actualBody.get("description"));
+
+        Reusable.deleteMethod("userGroupTypeURL", actualBody.get("id"));
+
     }
 
     @org.testng.annotations.Test
-    public void putTestUpdateUserGroupType() throws IOException {
-        UserGroupTypeServicePojo requestBodyt = new UserGroupTypeServicePojo(33,"NewGroup7","Studnts");
-        System.out.println(requestBodyt.getId());
+    public void putTestUpdateUserGroupType() {
 
-        Response response = Reusable.putMethod("userGroupTypeURL",requestBodyt);
-        ObjectMapper actualBody = new ObjectMapper();
+        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
+        Map<String, Object> requestPostBody = testData.expectedDataSetUp("NewGroup07", "Students");
 
-        UserGroupTypeServicePojo act = actualBody.readValue(response.asString(),UserGroupTypeServicePojo.class);
+        Response responsePost = Reusable.postMethod("userGroupTypeURL", requestPostBody);
+        JsonPath actualPostBody = responsePost.jsonPath();
+        Integer id = actualPostBody.getInt("id");
 
-        assertEquals(requestBodyt.getName(),act.getName());
-        assertEquals(requestBodyt.getDescription(),act.getDescription());
+        Map<String, Object> requestBody = testData.expectedDataIdSetUp(id, "NewGroup07", "Students of Software");
+
+        Response response = Reusable.putMethod("userGroupTypeURL", requestBody);
+
+        Map<String, Object> actualBody = JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
+
+        assertEquals(requestBody.get("id"), actualBody.get("id"));
+        assertEquals(requestBody.get("name"), actualBody.get("name"));
+        assertEquals(requestBody.get("description"), actualBody.get("description"));
+
+        Reusable.deleteMethod("userGroupTypeURL", actualBody.get("id"));
 
     }
 
     @org.testng.annotations.Test
     public void putTestUpdateNoUserGroupType() {
-        try {
-            Reusable.putMethod("userGroupTypeURL",300);
-            Assert.assertTrue(true);
+        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
+        Map<String, Object> expectedBody = testData.expectedDataIdSetUp(0, "Nothing", "Description");
 
-        } catch (Exception e){
+        try {                                                              // karakter sınırı var mı ?
+            Reusable.putMethod("userGroupTypeURL", expectedBody);      // ıd 0 ve negatifide ekle ?
+            Assert.assertTrue(false);
+
+        } catch (Exception e) {
             System.out.println("Exception = 404 not Found");
             Assert.assertTrue(true);
         }
     }
 
-    @org.testng.annotations.Test
-    public void getTestUserGroupType() {
-        // get için id li method lazım 200
-    }
 
     @org.testng.annotations.Test
     public void getTestNoUserGroupType() {
@@ -177,7 +239,7 @@ public class UserGroupTypeServiceTest extends Login {
             Reusable.getMethod("userGroupTypeIdURL");
             Assert.assertTrue(true);
 
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Exception = 404 not Found");
             Assert.assertTrue(true);
         }
@@ -194,14 +256,15 @@ public class UserGroupTypeServiceTest extends Login {
     @org.testng.annotations.Test
     public void deleteTestNoUserGroupType() {
         try {
-            Reusable.putMethod("userGroupTypeURL",300);
+            Reusable.putMethod("userGroupTypeURL", 300);
             Assert.assertTrue(true);
 
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Exception = 404 not Found");
             Assert.assertTrue(true);
         }
     }
 }
+
 
 
