@@ -58,27 +58,11 @@ public class CountryServiceTest extends Login{
     @org.testng.annotations.Test
     public void getNonIDCountry(){
 
+       Response response =  Reusable.getMethod("nonCountryURL");
+
+       response.then().assertThat().statusCode(404);
 
 
-        try {
-
-            Reusable.getMethod("nonCountryURL");
-
-                Assert.assertFalse(true,"Country Bulundu ");
-
-
-        }catch (Exception e){
-
-            System.out.println("Exception = 404 not Found");
-
-            Assert.assertTrue(true);
-
-        }
     }
-
-
-
-
-
 
 }
