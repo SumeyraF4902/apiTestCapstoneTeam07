@@ -1,0 +1,1 @@
+{"uuid":"905625fe-ef99-4729-99df-bf0721fdd5d8","name":"com.tests.allure.UserStatusServiceTest","children":["da7632d2-42a2-49c9-9951-389267b3ef12"],"befores":[{"name":"beToken","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1681162725306,"stop":1681162740465}],"afters":[],"start":1681162725182,"stop":1681162744964}
