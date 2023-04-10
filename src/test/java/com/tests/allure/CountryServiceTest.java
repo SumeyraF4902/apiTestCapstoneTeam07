@@ -64,7 +64,7 @@ public class CountryServiceTest extends Login{
 
             Reusable.getMethod("nonCountryURL");
 
-                Assert.assertTrue(true);
+                Assert.assertFalse(true,"Country Bulundu ");
 
 
         }catch (Exception e){
@@ -74,7 +74,6 @@ public class CountryServiceTest extends Login{
             Assert.assertTrue(true);
 
         }
-
     }
 
 
