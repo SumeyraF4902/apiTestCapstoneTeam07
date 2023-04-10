@@ -140,7 +140,11 @@ public class UserStatusServiceTest extends Login{
 
         response.then().assertThat().statusCode(200);
 
-        try {
+        response = Reusable.getIDMethod(url,id);
+
+        response.then().assertThat().statusCode(404);
+
+      /*  try {
 
             Reusable.getIDMethod(url,id);
 
@@ -153,7 +157,7 @@ public class UserStatusServiceTest extends Login{
 
             Assert.assertTrue(true);
 
-        }
+        }*/
 
     }
 
