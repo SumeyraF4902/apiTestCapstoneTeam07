@@ -15,10 +15,9 @@ import java.util.Map;
 import static org.hamcrest.Matchers.equalTo;
 import static org.testng.AssertJUnit.assertEquals;
 
-public class PermissionServiceTest  extends Login {
-static  int id;
+public class PermissionServiceTest extends Login {
     @Test
-    public void postPermession(){
+    public void postPermession() {
     /*{
 
          "id": 719,
@@ -27,52 +26,85 @@ static  int id;
             "app_id": 2
     }*/
 
-
-        PermissionServiceData permissionServiceData=new PermissionServiceData();
-        HashMap<String,Object>permessionExpectReq=permissionServiceData.expecdetData(null,"TAKAS",
-                "CAN.ALİ, write etc.",2);
-        System.out.println(permessionExpectReq);
-      Response response= Reusable.postMethod("permissionPostURL",permessionExpectReq);
-      response.then().assertThat().statusCode(201).contentType(ContentType.JSON);
-
-
-
-/*Map<String,Object> actualData= JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
-        assertEquals(permessionExpectReq.get("resource"),actualData.get("book"));
-        assertEquals(permessionExpectReq.get("action"),actualData.get("deneme24, write etc."));
-        assertEquals(permessionExpectReq.get("app_id"),actualData.get(2));*/
-
-
-        response.then().assertThat().statusCode(201).contentType(ContentType.JSON).
-                body("resource",equalTo("TAKAS"),"action",equalTo("CAN.ALİ, write etc."));
-JsonPath jsonPath = response.jsonPath();
-
-// Get the teams object from the response body
-        Map<String, ?> teams = jsonPath.getMap("");
-
-
-// Get the team01Id
-        id = (int) teams.get("id");
-
-//response=Reusable.getIDMethod("permissionPostURL");
-        System.out.println("creat sonrası get"+response);
+        Response response = Reusable.getMethod("permissionURL");
         response.prettyPrint();
-    }
-@Test
-        public void putPermessions(){
-    PermissionServiceData permissionServiceData=new PermissionServiceData();
-    HashMap<String,Object>permessionExpectReq=permissionServiceData.expecdetData(729,"book",
-            "C.F.T.24, write etc.",2);
-    System.out.println(permessionExpectReq);
-    Response response= Reusable.putMethod("permissionPostURL",permessionExpectReq);
-    response.then().assertThat().statusCode(200).contentType(ContentType.JSON);
-
-
-}
-    @Test
-    public void deletePermessions(){
-        Response response= Reusable.deleteMethod("permissionDeleteURL", id);
         response.then().assertThat().statusCode(200);
+
+        PermissionServiceData permissionServiceData = new PermissionServiceData();
+        HashMap<String, Object> permessionExpectReq = permissionServiceData.expecdetData(null, "Güzel",
+                "Günler Göreceğiz, Çocuklar ;)", 2);
+
+        response = Reusable.postMethod("permissionURL", permessionExpectReq);
+
+
+        Map<String, Object> actualData = JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
+        assertEquals(permessionExpectReq.get("resource"), actualData.get("resource"));
+        assertEquals(permessionExpectReq.get("action"), actualData.get("action"));
+        assertEquals(permessionExpectReq.get("app_id"), actualData.get("app_id"));
+
+        int id = (int) actualData.get("id");
+
+        response = Reusable.getIDMethod("permissionURLId", id);
+        System.out.println("creat sonrası get" + response);
+        response.prettyPrint();
+
+        response = Reusable.deleteMethod("permissionURLId", id);
+        response.then().assertThat().statusCode(200);
+
+    }
+
+    @Test
+    public void putPermessions() {
+
+        PermissionServiceData permissionServiceData = new PermissionServiceData();
+        HashMap<String, Object> permissionsPostReq = permissionServiceData.expecdetData(null, "YILDIZ", "GÜNEŞ,AY", 2);
+
+        Response response = Reusable.postMethod("permissionURL", permissionsPostReq);
+        response.then().assertThat().statusCode(201);
+
+        Map<String, Object> actualData = JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
+        assertEquals(permissionsPostReq.get("resource"), actualData.get("resource"));
+        int id = (int) actualData.get("id");
+        HashMap<String, Object> permessionPutReq = permissionServiceData.expecdetData(id, "İZİN",
+                "C.F.T.24, write etc.", 2);
+        response = Reusable.putMethod("permissionURL", permessionPutReq);
+        response.then().assertThat().statusCode(200).contentType(ContentType.JSON);
+
+        response = Reusable.getIDMethod("permissionURLId", id);
+        response.prettyPrint();
+
+        response = Reusable.deleteMethod("permissionURLId", id);
+        response.then().assertThat().statusCode(200);
+
+
+    }
+
+    @Test
+    public void deletePermessions() {
+
+
+        PermissionServiceData permissionServiceData = new PermissionServiceData();
+        HashMap<String, Object> permessionExpectReq = permissionServiceData.expecdetData(null, "Güzel",
+                "Günler Göreceğiz, Çocuklar ;)", 2);
+
+        Response response = Reusable.postMethod("permissionURL", permessionExpectReq);
+
+
+        Map<String, Object> actualData = JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
+        assertEquals(permessionExpectReq.get("resource"), actualData.get("resource"));
+
+        int id = (int) actualData.get("id");
+        response = Reusable.deleteMethod("permissionURLId", id);
+        response.then().assertThat().statusCode(200);
+
+
+
+
+
+
+
+
+
 
 /*JsonPath jsonPath = response.jsonPath();
 
@@ -83,5 +115,5 @@ JsonPath jsonPath = response.jsonPath();
 // Get the team01Id
         team_id = (int) teams.get("id");*/
 
-}
+    }
 }
