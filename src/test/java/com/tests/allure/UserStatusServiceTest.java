@@ -1,10 +1,12 @@
 package com.tests.allure;
 
+import com.github.javafaker.Faker;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Login;
+import pages.LoginCustomer;
 import testData.UserStatusServiceData;
 import utilities.JsonToJava;
 import utilities.Reusable;
@@ -16,18 +18,20 @@ import static org.hamcrest.Matchers.hasItems;
 public class UserStatusServiceTest extends Login{
 
 
-    public static  UserStatusServiceData serviceData = new UserStatusServiceData();
+    UserStatusServiceData serviceData = new UserStatusServiceData();
 
-    public static Response responsePost;
 
-    public static Integer id;
 
-    @Test(priority = 1)
+    public static String url = "userStatus";
+
+    Faker faker = new Faker();
+
+    @Test
     public void getUserStatusService(){
 
 
 
-        Response response = Reusable.getMethod("userStatus");
+        Response response = Reusable.getMethod(url);
 
         response.
                 then().
@@ -42,52 +46,48 @@ public class UserStatusServiceTest extends Login{
 
 
 
-    @Test(priority = 2)
+    @Test
     public void postUserStatusService(){
 
-        Map<String,Object> reqBody = serviceData.setupDataUserStatus();
+        Map<String,Object> reqBody = serviceData.setupDataUserStatus(faker.name().fullName(),faker.howIMetYourMother().character());
 
-        responsePost = Reusable.postMethod("userStatus",reqBody);
+       Response responsePost = Reusable.postMethod(url,reqBody);
 
         responsePost.then().assertThat().statusCode(201);
 
         Map<String,Object> actualDataMap = JsonToJava.convertJsonToJavaObject(responsePost.asString(), HashMap.class);
 
-        id = Integer.valueOf(responsePost.jsonPath().getString("id"));
+       Integer id = Integer.valueOf(responsePost.jsonPath().getString("id"));
 
         reqBody.put("id",id);
 
         for (String key: reqBody.keySet()){
             Assert.assertEquals(actualDataMap.get(key),reqBody.get(key));
         }
+
+        responsePost = Reusable.getIDMethod(url,id);
+        responsePost.then().assertThat().statusCode(200);
+
+        responsePost = Reusable.deleteMethod(url,id);
+        responsePost.then().assertThat().statusCode(200);
+
+
     }
 
 
-    @Test(priority = 3)
+    @Test
     public void getIDUserStatusService(){
 
-        Response response = Reusable.getIDMethod("userStatus", id);
+        Map<String,Object> reqBody =
+                serviceData.setupDataUserStatus(faker.name().fullName(),faker.howIMetYourMother().highFive());
 
-        response.then().assertThat().statusCode(200);
+        Response response = Reusable.postMethod(url,reqBody);
 
-        Map<String,Object> actualDataMap = JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
-
-        Map<String,Object> expectedDataMap = JsonToJava.convertJsonToJavaObject(responsePost.asString(), HashMap.class);
-
-        for (String key: expectedDataMap.keySet()){
-            Assert.assertEquals(actualDataMap.get(key),expectedDataMap.get(key));
-        }
-
-    }
-
-    @Test(priority = 4)
-    public void putUserStatusService(){
-
-        Map<String,Object> reqBody = serviceData.putDataUserStatus();
+        Integer id = Integer.valueOf(response.jsonPath().getString("id"));
 
         reqBody.put("id",id);
 
-        Response response = Reusable.putMethod("userStatus",reqBody);
+        response = Reusable.getIDMethod(url, id);
 
         response.then().assertThat().statusCode(200);
 
@@ -100,60 +100,80 @@ public class UserStatusServiceTest extends Login{
 
     }
 
-    @Test(priority = 5)
-    public void deleteUserStatusService(){
+    @Test
+    public void putUserStatusService(){
 
+        Map<String,Object> reqBody =
+                serviceData.setupDataUserStatus(faker.name().fullName(),faker.howIMetYourMother().highFive());
 
-        Response response = Reusable.deleteMethod("userStatus", id);
+        Response response = Reusable.postMethod(url,reqBody);
+
+        Integer id = Integer.valueOf(response.jsonPath().getString("id"));
+
+        Map<String,Object> putReqBody = serviceData.setupIDDataUserStatus(id,faker.name().fullName(),faker.howIMetYourMother().character());
+
+        response = Reusable.putMethod(url,putReqBody);
 
         response.then().assertThat().statusCode(200);
 
-        try {
-
-            Reusable.getIDMethod("userStatus",id);
-
-            Assert.assertTrue(true);
+        Map<String,Object> actualDataMap = JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
 
 
-        }catch (Exception e){
-
-            System.out.println("Exception = 404 not Found");
-
-            Assert.assertTrue(true);
-
+        for (String key: putReqBody.keySet()){
+            Assert.assertEquals(actualDataMap.get(key),putReqBody.get(key));
         }
+        response = Reusable.deleteMethod(url,id);
+        response.then().assertThat().statusCode(200);
+
+    }
+
+    @Test
+    public void deleteUserStatusService(){
+        Map<String,Object> reqBody =
+                serviceData.setupDataUserStatus(faker.name().fullName(),faker.howIMetYourMother().highFive());
+
+        Response response = Reusable.postMethod(url,reqBody);
+
+        Integer id = Integer.valueOf(response.jsonPath().getString("id"));
+
+         response = Reusable.deleteMethod(url, id);
+
+        response.then().assertThat().statusCode(200);
+
+        response = Reusable.getIDMethod(url,id);
+
+        response.then().assertThat().statusCode(404);
+
 
     }
 
     @Test
     public void negativePostUserStatusService(){
 
-        Map<String,Object> reqBody = serviceData.setupNegativeDataUserStatus();
+        Map<String,Object> reqBody = serviceData.setupDataUserStatus("",faker.howIMetYourMother().catchPhrase());
 
         System.out.println("reqBody = " + reqBody);
 
-        Response response= Reusable.postMethod("userStatus",reqBody);
+        Response response= Reusable.postMethod(url,reqBody);
 
         response.then().assertThat().statusCode(406);
 
-        response.then().body("error",equalTo("Not Acceptable"));
+        response.then().assertThat().body("error",equalTo("Not Acceptable"));
 
     }
 
     @Test
         public void negativePutUserStatusService(){
 
-        Map<String,Object> postReqBody = serviceData.setupDataUserStatus();
+        Map<String,Object> postReqBody = serviceData.setupDataUserStatus(faker.name().fullName(),faker.howIMetYourMother().highFive());
 
-        Response response = Reusable.postMethod("userStatus",postReqBody);
+        Response response = Reusable.postMethod(url,postReqBody);
 
         Integer id = Integer.valueOf(response.jsonPath().getString("id"));
 
-        Map<String,Object> reqBody = serviceData.setupNegativeDataUserStatus();
-        reqBody.put("id",id);
+        Map<String,Object> reqBody = serviceData.setupIDDataUserStatus(id,"",faker.gameOfThrones().character());
 
-
-         response= Reusable.putMethod("userStatus",reqBody);
+        response= Reusable.putMethod(url,reqBody);
 
         response.then().assertThat().statusCode(200);
 
@@ -161,7 +181,7 @@ public class UserStatusServiceTest extends Login{
 
         Assert.assertEquals(postReqBody.get("name"),actualDataMap.get("name"));
 
-        response = Reusable.deleteMethod("userStatus",id);
+        response = Reusable.deleteMethod(url,id);
 
         response
                 .then().statusCode(200);
@@ -171,15 +191,66 @@ public class UserStatusServiceTest extends Login{
     @Test
     public void negativePostUserIDStatusService(){
 
-        Map<String,Object> reqBody = serviceData.setupIDDataUserStatus();
+        Map<String,Object> reqBody =
+                serviceData.
+                setupIDDataUserStatus(faker.number().randomDigit(),
+                        faker.name().title(),
+                        faker.howIMetYourMother().character());
 
         System.out.println("reqBody = " + reqBody);
 
-        Response response= Reusable.postMethod("userStatus",reqBody);
+        Response response= Reusable.postMethod(url,reqBody);
 
         response.then().assertThat().statusCode(406);
 
         response.then().body("error",equalTo("Not Acceptable"));
+
+    }
+    @Test
+    public void negativePostNotDescriptionUserStatusService(){
+
+        Map<String,Object> reqBody =
+                serviceData.
+                        setupDataUserStatus(
+                                faker.howIMetYourMother().character(),
+                                faker.howIMetYourMother().character());
+        reqBody.remove("description");
+
+        System.out.println("reqBody = " + reqBody);
+
+        Response response= Reusable.postMethod(url,reqBody);
+
+        response.then().assertThat().statusCode(201);
+
+       Integer id = Integer.valueOf(response.jsonPath().getString("id"));
+
+       response = Reusable.deleteMethod(url,id);
+
+       response.then().assertThat().statusCode(200);
+
+    }
+
+    @Test
+    public void negativePostNameIsSpaceUserStatusService(){
+
+        Map<String,Object> reqBody =
+                serviceData.
+                        setupDataUserStatus(
+                                "           ",
+                                faker.howIMetYourMother().character());
+        reqBody.remove("description");
+
+        System.out.println("reqBody = " + reqBody);
+
+        Response response= Reusable.postMethod(url,reqBody);
+
+        response.then().assertThat().statusCode(201);
+
+        Integer id = Integer.valueOf(response.jsonPath().getString("id"));
+
+        response = Reusable.deleteMethod(url,id);
+
+        response.then().assertThat().statusCode(200);
 
     }
 

@@ -10,69 +10,28 @@ public class UserStatusServiceData {
 
     public Map<String,Object> expectedDataMap;
 
-   /*
-   {
 
-  "name": "active",
-  "description": "User account is active"
-}
-    */
-       public static Faker faker = new Faker();
-
-
-    public Map<String,Object> setupDataUserStatus(){
+    public Map<String,Object> setupDataUserStatus(String name, String description){
 
         expectedDataMap = new HashMap<>();
 
-
-
-        expectedDataMap.put("name",faker.name().title());
-        expectedDataMap.put("description",faker.howIMetYourMother().character());
-
+        expectedDataMap.put("name",name);
+        expectedDataMap.put("description",description);
 
         return expectedDataMap;
 
 
     }
 
-    public Map<String,Object> putDataUserStatus(){
 
-        
-
-        expectedDataMap = new HashMap<>();
-
-
-        expectedDataMap.put("name",faker.name().title());
-        expectedDataMap.put("description",faker.howIMetYourMother().highFive());
-
-
-        return expectedDataMap;
-
-
-    }
-    public Map<String,Object> setupNegativeDataUserStatus(){
+    public Map<String,Object> setupIDDataUserStatus(Integer id, String name, String description){
 
         expectedDataMap = new HashMap<>();
 
 
-
-        expectedDataMap.put("name","");
-        expectedDataMap.put("description","User account is active");
-
-
-        return expectedDataMap;
-
-
-    }
-
-    public Map<String,Object> setupIDDataUserStatus(){
-
-        expectedDataMap = new HashMap<>();
-
-
-        expectedDataMap.put("id",faker.number().randomDigit());
-        expectedDataMap.put("name",faker.name().title());
-        expectedDataMap.put("description",faker.howIMetYourMother().character());
+        expectedDataMap.put("id",id);
+        expectedDataMap.put("name",name);
+        expectedDataMap.put("description",description);
 
 
         return expectedDataMap;
