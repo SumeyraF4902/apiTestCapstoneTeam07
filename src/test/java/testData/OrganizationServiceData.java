@@ -1,28 +1,28 @@
 package testData;
 
+import com.tests.allure.OrganizationServiceTest;
+
 import java.util.HashMap;
 
 public class OrganizationServiceData {
 
     public static HashMap<String,Object> expectedData;
 
+    public static HashMap<String,Object> expectedDataPut;
+
     /*
+
      {
-      "id": 1,
-      "name": "TEAM00767",
-      "founder_id": 2,
-      "short_name": "team",
-      "address": "Ronald Avenue McMillan Drive No. 5, Tysons, Virginia",
-      "phone": "15555555555",
-      "email": "contactacme.com",
-      "website": "www.acme.com",
-      "fax": "1555555555",
-      "status_id": 1
-       "created_at": "2023-04-06T21:24:42.939062Z",
-       "updated_at": "2023-04-06T21:24:42.939064Z"
+  "id": 187,
+  "name": "Testorix",
+  "founder_id": 43,
+  "short_name": "TX",
+   "address": "....",
+  }
 
 
-     }
+
+
       */
  public HashMap expectedData(){
 
@@ -30,15 +30,10 @@ public class OrganizationServiceData {
 
 
      expectedData.put("id",null);
-     expectedData.put("name","Acme071");
-     expectedData.put("founder_id",2);
+     expectedData.put("name","Team007237");
+     expectedData.put("founder_id",43);
+     expectedData.put("address","Poland");
      expectedData.put("short_name","team");
-     expectedData.put("address","Ronald Avenue McMillan Drive No. 5, Tysons, Virginia");
-     expectedData.put("phone","15555555555");
-     expectedData.put("email","contactacme.com");
-     expectedData.put("website","www.acme.com");
-     expectedData.put("fax","1555555555");
-     expectedData.put("status_id",1);
      expectedData.put("created_at",null);
      expectedData.put("updated_at",null);
 
@@ -48,25 +43,22 @@ public class OrganizationServiceData {
 
 
 
-    public HashMap<String,Object>setUpForPutREq (){
+    public HashMap expectedDataPut(){
 
-        expectedData = new HashMap<>();
 
-        expectedData.put("id",1);
-        expectedData.put("name","Acme");
-        expectedData.put("founder_id",2);
-        expectedData.put("short_name","team");
-        expectedData.put("address","Ronald Avenue McMillan Drive No. 5, Tysons, Virginia");
-        expectedData.put("phone","15555555555");
-        expectedData.put("email","contactacme.com");
-        expectedData.put("website","www.acme.com");
-        expectedData.put("fax","1555555555");
-        expectedData.put("status_id",1);
+        expectedDataPut = new HashMap<>();
+
+        expectedDataPut.put("id",null);
+        expectedDataPut.put("name","Team070");
+        expectedDataPut.put("founder_id",43);
+        expectedData.put("address","Poland");
+        expectedDataPut.put("short_name","team");
 
 
 
 
-     return expectedData;
+
+     return expectedDataPut;
     }
 
 
