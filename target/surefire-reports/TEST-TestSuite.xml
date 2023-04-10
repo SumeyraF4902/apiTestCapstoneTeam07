@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="13" failures="2" name="TestSuite" time="24.839" errors="0" skipped="0">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="java.vm.version" value="11.0.15+8-LTS-149"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11.0.15\bin"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:/Users/hp/IdeaProjects/capstoneTeam07ApiProject"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="https://openjdk.java.net/"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="TR"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="C:\Users\hp\IdeaProjects\capstoneTeam07ApiProject"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="java.runtime.version" value="11.0.15+8-LTS-149"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\hp\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="classworlds.conf" value="C:/Program Files/apache-maven-3.8.6/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="Cp1254"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-11.0.15\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\hp\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\Program Files\apache-maven-3.8.6\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\dotnet;C:\Program Files\allure-2.20.1\allure-2.20.1\bin;C:\Users\hp\scoop\shims;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Users\hp\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Java\jdk-11.0.15\bin;C:\Users\hp\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\apache-maven-3.8.6\bin;."/>
+    <property name="maven.conf" value="C:/Program Files/apache-maven-3.8.6/conf"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="55.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.0"/>
+    <property name="library.jansi.path" value="C:/Program Files/apache-maven-3.8.6/lib/jansi-native"/>
+    <property name="user.home" value="C:\Users\hp"/>
+    <property name="user.timezone" value="Asia/Istanbul"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="file.encoding" value="Cp1254"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="user.name" value="hp"/>
+    <property name="java.class.path" value="C:/Program Files/apache-maven-3.8.6/boot/plexus-classworlds-2.6.0.jar"/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean install"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-11.0.15"/>
+    <property name="user.language" value="tr"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="11.0.15"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="sun.stderr.encoding" value="cp857"/>
+    <property name="maven.home" value="C:\Program Files\apache-maven-3.8.6"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.version.date" value="2022-04-19"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="java.vendor.version" value="18.9"/>
+    <property name="sun.stdout.encoding" value="cp857"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="com.tests.allure.CountryServiceTest" name="getAllCountry" time="2.99"/>
+  <testcase classname="com.tests.allure.CountryServiceTest" name="getIDCountry" time="1.309"/>
+  <testcase classname="com.tests.allure.CountryServiceTest" name="getNonIDCountry" time="0.926">
+    <failure message="Country Bulundu  expected [false] but found [true]" type="java.lang.AssertionError">java.lang.AssertionError: Country Bulundu  expected [false] but found [true]
+	at org.testng.Assert.fail(Assert.java:110)
+	at org.testng.Assert.failNotEquals(Assert.java:1577)
+	at org.testng.Assert.assertFalse(Assert.java:78)
+	at com.tests.allure.CountryServiceTest.getNonIDCountry(CountryServiceTest.java:67)
+</failure>
+  </testcase>
+  <testcase classname="com.tests.allure.UserStatusServiceTest" name="deleteUserStatusService" time="3.453">
+    <failure message="User Status Bulundu  expected [false] but found [true]" type="java.lang.AssertionError">java.lang.AssertionError: User Status Bulundu  expected [false] but found [true]
+	at org.testng.Assert.fail(Assert.java:110)
+	at org.testng.Assert.failNotEquals(Assert.java:1577)
+	at org.testng.Assert.assertFalse(Assert.java:78)
+	at com.tests.allure.UserStatusServiceTest.deleteUserStatusService(UserStatusServiceTest.java:147)
+</failure>
+    <system-out>Token: eyJraWQiOiJlZWY0NGVjYS0xNTg1LTRiZGItOTBkNy03YzgxN2Y1Y2M2ZmEiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJib0B0ZXN0b3JpeC5jb20iLCJzdWJfZGVmYXVsdF9tZW1iZXJzaGlwX3R5cGVfaWQiOjYsInN1Yl9pZCI6MzMsInN1Yl9kZWZhdWx0X3N1YnNjcmlwdGlvbl9pZCI6Ijg2MWFiMmM5LTk1NjktNDYwMS1hZjQwLWJjOTA3NjZhZWM4MiIsInN1Yl9hcHAiOjIsImlzcyI6Imh0dHBzOlwvXC9hM20tcWEtZ20zLnF1YXNwYXJlcGFydHMuY29tIiwiYXVkIjoiMTY3Mzk4NTE4NF9aWHNOVDdDdWhUenJpamwiLCJuYmYiOjE2ODExMjQ1ODcsInNjb3BlIjpbIm1lbWJlcnNoaXA6d3JpdGUiLCJST0xFX0d1ZXN0IiwibWVtYmVyc2hpcDpyZWFkIl0sInN1Yl9kZWZhdWx0X3JvbGVfaWQiOjYsImV4cCI6MTY4MTEyNjM4NywiaWF0IjoxNjgxMTI0NTg3fQ.SGzOF_7_c3uvChXVSBuw9VrM9dAoIcMzkSp5FF89l9HgXwHiX6bUwCKgwhcWhyim-6DrTHplAOETEoknNhg8sRqJ02SWx54cYhcEdDJmVZHG5c5vXzRCDZOFMA1uk9rddvhB-YGA7MlQcy9hqz-kNwW-1fMaeyKxyqV7_jy2qe7DPlpvdIoPRFgUvuAeQeDLNDdfJYlkUvxWLebYL6s90bXQa2xnMemgLD6iUtgThXRt7NR8sOW0jsFkjPWu0ZZxZm0aBaV2NbbDz9otvWNqFgjF6ZfgeWc-XoFVRtQckkiEj_VTJ66ZhXimXGXOO_rJakMxyFxvrWSNGQPFnztKHw
+{
+    &quot;id&quot;: 273,
+    &quot;name&quot;: &quot;Mr. Jayson Strosin&quot;,
+    &quot;description&quot;: &quot;Self Five&quot;
+}
+
+</system-out>
+    <system-err>Starting ChromeDriver 111.0.5563.64 (c710e93d5b63b7095afe8c2c17df34408078439d-refs/branch-heads/5563@{#995}) on port 53225
+Only local connections are allowed.
+Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+ChromeDriver was started successfully.
+Apr 10, 2023 2:03:02 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected upstream dialect: W3C
+Apr 10, 2023 2:03:02 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 111, so returning the closest version found: a no-op implementation
+Apr 10, 2023 2:03:02 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+INFO: Unable to find CDP implementation matching 111.
+Apr 10, 2023 2:03:02 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$3
+WARNING: Unable to find version of CDP to use for . You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.4.0` where the version (&quot;v86&quot;) matches the version of the chromium-based browser you&apos;re using and the version number of the artifact is the same as Selenium&apos;s.
+</system-err>
+  </testcase>
+  <testcase classname="com.tests.allure.UserStatusServiceTest" name="getIDUserStatusService" time="1.746"/>
+  <testcase classname="com.tests.allure.UserStatusServiceTest" name="getUserStatusService" time="1.061"/>
+  <testcase classname="com.tests.allure.UserStatusServiceTest" name="negativePostNameIsSpaceUserStatusService" time="1.765"/>
+  <testcase classname="com.tests.allure.UserStatusServiceTest" name="negativePostNotDescriptionUserStatusService" time="1.81"/>
+  <testcase classname="com.tests.allure.UserStatusServiceTest" name="negativePostUserIDStatusService" time="0.888"/>
+  <testcase classname="com.tests.allure.UserStatusServiceTest" name="negativePostUserStatusService" time="0.876"/>
+  <testcase classname="com.tests.allure.UserStatusServiceTest" name="negativePutUserStatusService" time="2.67"/>
+  <testcase classname="com.tests.allure.UserStatusServiceTest" name="postUserStatusService" time="2.656"/>
+  <testcase classname="com.tests.allure.UserStatusServiceTest" name="putUserStatusService" time="2.689"/>
+</testsuite>
