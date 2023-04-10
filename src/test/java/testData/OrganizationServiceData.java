@@ -3,12 +3,16 @@ package testData;
 import com.tests.allure.OrganizationServiceTest;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class OrganizationServiceData {
 
     public static HashMap<String,Object> expectedData;
 
     public static HashMap<String,Object> expectedDataPut;
+
+
+
 
     /*
 
@@ -30,7 +34,7 @@ public class OrganizationServiceData {
 
 
      expectedData.put("id",null);
-     expectedData.put("name","Team007237");
+     expectedData.put("name","Team00007");
      expectedData.put("founder_id",43);
      expectedData.put("address","Poland");
      expectedData.put("short_name","team");
@@ -60,6 +64,26 @@ public class OrganizationServiceData {
 
      return expectedDataPut;
     }
+
+
+    public HashMap<String, Object> expectedDataN(Integer id, String name,Integer founder_id,String short_name){
+
+        HashMap<String, Object> expectedDataN = new HashMap<String, Object>();
+
+        expectedDataN.put("id",id);
+        expectedDataN.put("name",name);
+        expectedDataN.put("founder_id",founder_id);
+        expectedDataN.put("short_name",short_name);
+
+
+
+        return expectedDataN;
+    }
+
+
+
+
+
 
 
 
