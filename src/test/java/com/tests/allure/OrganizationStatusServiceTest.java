@@ -1,5 +1,6 @@
 package com.tests.allure;
 
+import com.google.gson.Gson;
 import io.restassured.http.ContentType;
 import io.restassured.matcher.ResponseAwareMatcher;
 import io.restassured.path.json.JsonPath;
@@ -10,6 +11,7 @@ import org.testng.annotations.Test;
 import pages.Login;
 import pojoDatas.OrganizationStatusServicePojo;
 import testData.OrganizationStatusServiceData;
+import testData.UserGroupTypeServiceData;
 import utilities.ConfigReader;
 import utilities.Reusable;
 
@@ -100,6 +102,54 @@ public class OrganizationStatusServiceTest extends Login {
     }
 
     @Test
+    public void postWithSpaceName() {
+        // UserGroupTypeServicePojo requestBody = new UserGroupTypeServicePojo(null, "   ", "Space Character");
+        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
+        Map<String,Object> requestBody= testData.expectedDataSetUp("   ", "Space Character");
+
+        Response response = Reusable.postMethod("organizationStatusURL", requestBody);
+
+        JsonPath actualBody = response.jsonPath();
+        response.then().assertThat().statusCode(201);
+
+        Assert.assertEquals(requestBody.get("name"), actualBody.getString("name"));
+        Assert.assertEquals(requestBody.get("description"), actualBody.getString("description"));
+
+
+    }
+
+    @org.testng.annotations.Test
+    public void postWithSpecialChName() {
+
+        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
+        Map<String, Object> requestBody = testData.expectedDataSetUp("?*/%", "Special Character");
+        Response response = Reusable.postMethod("organizationStatusURL", requestBody);
+
+        Gson gson = new Gson();
+        Map<String, Object> actualBody = gson.fromJson(response.asString(), HashMap.class);
+
+        response.then().assertThat().statusCode(201);
+        Assert.assertEquals(requestBody.get("name"), actualBody.get("name"));
+        Assert.assertEquals(requestBody.get("description"), actualBody.get("description"));
+    }
+
+    @org.testng.annotations.Test
+    public void postNumChName() {
+
+        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
+        Map<String,Object> requestBody= testData.expectedDataSetUp("12345", "Numeric Character");
+        Response response = Reusable.postMethod("organizationStatusURL", requestBody);
+
+        JsonPath actualBody = response.jsonPath();
+
+        response.then().assertThat().statusCode(201);
+        Assert.assertEquals(requestBody.get("name"), actualBody.getString("name"));
+        Assert.assertEquals(requestBody.get("description"), actualBody.getString("description"));
+
+
+    }
+
+        @Test
     public void put() {
         OrganizationStatusServiceData statusData = new OrganizationStatusServiceData();
         Map<String, Object> request = statusData.post2();
