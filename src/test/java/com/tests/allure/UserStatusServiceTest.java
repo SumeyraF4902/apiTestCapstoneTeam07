@@ -144,20 +144,6 @@ public class UserStatusServiceTest extends Login{
 
         response.then().assertThat().statusCode(404);
 
-      /*  try {
-
-            Reusable.getIDMethod(url,id);
-
-            Assert.assertFalse(true,"User Status Bulundu ");
-
-
-        }catch (Exception e){
-
-            System.out.println("Exception = 404 not Found");
-
-            Assert.assertTrue(true);
-
-        }*/
 
     }
 
