@@ -4,6 +4,7 @@
     <test name="User Tests">
         <classes>
             <class name="com.tests.allure.CountryServiceTest" />
+            <class name="com.tests.allure.UserStatusServiceTest" />
         </classes>
     </test>
 </suite>
