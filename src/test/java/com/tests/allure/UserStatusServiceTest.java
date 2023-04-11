@@ -26,7 +26,9 @@ public class UserStatusServiceTest extends Login{
 
     Faker faker = new Faker();
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void getUserStatusService(){
 
 
@@ -46,7 +48,9 @@ public class UserStatusServiceTest extends Login{
 
 
 
-    @Test
+    @Test(
+            groups = {"smoke, regression"}
+    )
     public void postUserStatusService(){
 
         Map<String,Object> reqBody = serviceData.setupDataUserStatus(faker.name().fullName(),faker.howIMetYourMother().character());
@@ -75,7 +79,9 @@ public class UserStatusServiceTest extends Login{
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void getIDUserStatusService(){
 
         Map<String,Object> reqBody =
@@ -100,7 +106,9 @@ public class UserStatusServiceTest extends Login{
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void putUserStatusService(){
 
         Map<String,Object> reqBody =
@@ -127,7 +135,9 @@ public class UserStatusServiceTest extends Login{
 
     }
 
-    @Test
+    @Test(
+            groups = {"smoke, regression"}
+    )
     public void deleteUserStatusService(){
         Map<String,Object> reqBody =
                 serviceData.setupDataUserStatus(faker.name().fullName(),faker.howIMetYourMother().highFive());
@@ -147,7 +157,9 @@ public class UserStatusServiceTest extends Login{
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void negativePostUserStatusService(){
 
         Map<String,Object> reqBody = serviceData.setupDataUserStatus("",faker.howIMetYourMother().catchPhrase());
@@ -163,7 +175,9 @@ public class UserStatusServiceTest extends Login{
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
         public void negativePutUserStatusService(){
 
         Map<String,Object> postReqBody = serviceData.setupDataUserStatus(faker.name().fullName(),faker.howIMetYourMother().highFive());
@@ -189,7 +203,9 @@ public class UserStatusServiceTest extends Login{
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void negativePostUserIDStatusService(){
 
         Map<String,Object> reqBody =
@@ -207,7 +223,9 @@ public class UserStatusServiceTest extends Login{
         response.then().body("error",equalTo("Not Acceptable"));
 
     }
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void negativePostNotDescriptionUserStatusService(){
 
         Map<String,Object> reqBody =
@@ -231,7 +249,9 @@ public class UserStatusServiceTest extends Login{
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void negativePostNameIsSpaceUserStatusService(){
 
         Map<String,Object> reqBody =

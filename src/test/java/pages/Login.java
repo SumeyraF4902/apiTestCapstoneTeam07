@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 
 
 public class Login {
@@ -21,7 +23,9 @@ public class Login {
     public Login() {
 
     }
-    @BeforeClass
+    @BeforeMethod(
+            groups = {"smoke,regression"}
+    )
     public void beToken(){
         WebDriverManager.chromedriver().setup();
         ChromeOptions opt = new ChromeOptions().setHeadless(true);

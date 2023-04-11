@@ -22,14 +22,19 @@ public class MembershipServiceTest extends Login {
     static JsonPath actualData;
     MembershipServiceData data;
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void TC01GetAllMembership() {
         Reusable.getMethod("getMembershipServiceUrl");
 
     }
 
 
-    @Test
+    @Test(
+            groups = {"smoke,regression"}
+    )
+
     public void TC02Post() {
         data = new MembershipServiceData();
         Map<String, Object> expectedData = data.Data(2, 332, 27, 27, true,  true, false);
@@ -47,7 +52,9 @@ public class MembershipServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void TC03Put() {
         data = new MembershipServiceData();
         Map<String, Object> expectedData = data.putSubscriptionId(2, 33, subscriptionId, 6,
@@ -56,13 +63,17 @@ public class MembershipServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"smoke,regression"}
+    )
     public void TC04Delete() {
         Reusable.deleteMethod("membershipServiceUrl", subscriptionId);
         System.out.println("subscriptionId = " + subscriptionId);
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void TC05GetMembershipSuspend() {
         Response response = Reusable.getMethod("getMembershipServiceSuspendUrl");
         response.
@@ -77,7 +88,9 @@ public class MembershipServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void TC06PutRole() {
         data = new MembershipServiceData();
         Map<String, Object> expectedData = data.expectedDataRole(2, 332, "5dbc8b45-956a-4eaa-bb1f-3411730b7453", 6, false);
@@ -94,7 +107,9 @@ public class MembershipServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void TC07PutRoleNegative() {
         data = new MembershipServiceData();
         Map<String, Object> expectedData = data.expectedDataRole(2, 332, "5dbc8b45-956a-4eaa-bb1f-3411730b7452", 6, false);

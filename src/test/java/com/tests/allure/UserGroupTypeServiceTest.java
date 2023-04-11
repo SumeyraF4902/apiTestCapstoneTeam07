@@ -32,7 +32,9 @@ public class UserGroupTypeServiceTest extends Login {
     Faker faker = new Faker();
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void getTestAllUserGroupType() {
         Response response = Reusable.getMethod("userGroupTypeURL");
 
@@ -47,7 +49,9 @@ public class UserGroupTypeServiceTest extends Login {
 
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void getTestUserGroupTypeById() {
         Map<String, Object> requestBody = testData.expectedDataSetUp(faker.company().industry(), faker.company().catchPhrase());
 
@@ -67,7 +71,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void getTestUserGroupTypeByNoId() {
         Map<String, Object> requestBody = testData.expectedDataSetUp(faker.company().industry(), faker.company().catchPhrase());
 
@@ -81,7 +87,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"smoke, regression"}
+    )
     public void postTestAddNewUserType() {
         Map<String, Object> requestBody = testData.expectedDataSetUp(faker.company().industry(), faker.company().catchPhrase());
 
@@ -97,7 +105,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void postTestAddNewUserTypeByID() {
         Map<String, Object> requestBody = testData.expectedDataIdSetUp(faker.number().numberBetween(4, 100), faker.company().industry(), faker.company().catchPhrase());
 
@@ -109,7 +119,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void postTestAddNewUserTypeWithNullName() {
         Map<String, Object> requestBody = testData.expectedDataSetUp(null, faker.company().catchPhrase());
 
@@ -121,7 +133,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void postTestAddNewUserTypeWithEmptyName() {
         Map<String, Object> requestBody = testData.expectedDataSetUp("", faker.company().catchPhrase());
 
@@ -133,7 +147,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void postTestAddNewUserTypeWith3SpaceName() {
         Map<String, Object> requestBody = testData.expectedDataSetUp("   ", "Space Character");
 
@@ -149,7 +165,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void postTestAddNewUserTypeWithSpecialCharacterName() {
         Map<String, Object> requestBody = testData.expectedDataSetUp("?*/%", "Special Character");
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
@@ -164,7 +182,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void postTestAddNewUserTypeWithNumericCharacterName() {
         Map<String, Object> requestBody = testData.expectedDataSetUp("12345", "Numeric Character");
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
@@ -179,7 +199,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void postTestAddNewUserTypeWithEmptyDescription() {
         Map<String, Object> requestBody = testData.expectedDataSetUp(faker.company().industry(), null);
 
@@ -196,7 +218,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void putTestUpdateUserGroupType() {
         Map<String, Object> requestPostBody = testData.expectedDataSetUp(faker.company().industry(), faker.company().catchPhrase());
 
@@ -219,7 +243,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void putTestUpdateUserGroupTypeById() {
         Map<String, Object> expectedBody = testData.expectedDataIdSetUp(0, faker.company().buzzword(), faker.company().catchPhrase());
 
@@ -228,7 +254,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void putTestUpdateJustNameUserGroupType() {
         Map<String, Object> requestPostBody = testData.expectedDataSetUp(faker.company().industry(), "same description");
 
@@ -251,7 +279,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void putTestUpdateJustDescriptionUserGroupType() {
         Map<String, Object> requestPostBody = testData.expectedDataSetUp("Group07", faker.company().catchPhrase());
 
@@ -274,7 +304,9 @@ public class UserGroupTypeServiceTest extends Login {
 
 
 
-    @Test
+    @Test(
+            groups = {"smoke, regression"}
+    )
     public void deleteTestUserGroupTypeById() {
         Map<String, Object> requestPostBody = testData.expectedDataSetUp(faker.company().industry(), faker.company().catchPhrase());
 
@@ -288,7 +320,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"smoke, regression"}
+    )
     public void deleteTestUserGroupTypeByNoId() {
         Map<String, Object> requestPostBody = testData.expectedDataSetUp(faker.company().industry(), faker.company().catchPhrase());
 
@@ -302,7 +336,9 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void generalTest() {
         Map<String, Object> requestPostBody = testData.expectedDataSetUp("General", "not detailed");
 
@@ -344,7 +380,9 @@ public class UserGroupTypeServiceTest extends Login {
                 statusCode(404);
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void testMaxBounds() {
        Map<String,Object> expectedBody = testData.expectedDataSetUp(faker.lorem().fixedString(50),faker.lorem().fixedString(104));
        Response response = Reusable.postMethod("userGroupTypeURL",expectedBody);
@@ -358,7 +396,9 @@ public class UserGroupTypeServiceTest extends Login {
        Reusable.deleteMethod("userGroupTypeURL",id);
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void testNameBoundOut() {
         Map<String,Object> expectedBody = testData.expectedDataSetUp(faker.lorem().fixedString(55),faker.lorem().fixedString(255));
         Response response = Reusable.postMethod("userGroupTypeURL",expectedBody);
@@ -369,7 +409,9 @@ public class UserGroupTypeServiceTest extends Login {
                 statusCode(500);
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void testDescriptionBoundOut() {
         Map<String,Object> expectedBody = testData.expectedDataSetUp(faker.lorem().fixedString(50),faker.lorem().fixedString(260));
         Response response = Reusable.postMethod("userGroupTypeURL",expectedBody);

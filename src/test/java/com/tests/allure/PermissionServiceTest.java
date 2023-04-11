@@ -16,15 +16,11 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class PermissionServiceTest extends Login {
-    @Test
+    @Test(
+            groups = {"smoke,regression"}
+    )
     public void postPermession() {
-    /*{
 
-         "id": 719,
-        "resource": "book",
-            "action": "deneme24, write etc.",
-            "app_id": 2
-    }*/
 
         Response response = Reusable.getMethod("permissionURL");
         response.prettyPrint();
@@ -53,7 +49,9 @@ public class PermissionServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void putPermessions() {
 
         PermissionServiceData permissionServiceData = new PermissionServiceData();
@@ -79,7 +77,9 @@ public class PermissionServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"smoke,regression"}
+    )
     public void deletePermessions() {
 
 
@@ -97,23 +97,6 @@ public class PermissionServiceTest extends Login {
         response = Reusable.deleteMethod("permissionURLId", id);
         response.then().assertThat().statusCode(200);
 
-
-
-
-
-
-
-
-
-
-/*JsonPath jsonPath = response.jsonPath();
-
-// Get the teams object from the response body
-        Map<String, ?> teams = jsonPath.getMap("");
-
-
-// Get the team01Id
-        team_id = (int) teams.get("id");*/
 
     }
 }

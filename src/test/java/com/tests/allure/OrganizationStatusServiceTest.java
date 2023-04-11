@@ -32,7 +32,9 @@ public class OrganizationStatusServiceTest extends Login {
     OrganizationStatusServiceData statusData = new OrganizationStatusServiceData();
 
 
-    @org.testng.annotations.Test
+    @Test(
+            groups = {"regression"}
+    )
     public void get() {
 
 
@@ -45,15 +47,11 @@ public class OrganizationStatusServiceTest extends Login {
         Assert.assertEquals(orgStatusList.size(), orgStatusSayi);
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void GetID() {
 
-        /*
-         "id": 105,
-  "name": "team070",
-  "description": "put successfully"
-}
-         */
 
         response = Reusable.getMethod("organizationStatusIdURL");
 
@@ -68,7 +66,9 @@ public class OrganizationStatusServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"smoke,regression"}
+    )
     public void post() {
 
         OrganizationStatusServiceData statusData = new OrganizationStatusServiceData();
@@ -84,7 +84,9 @@ public class OrganizationStatusServiceTest extends Login {
         response.then().assertThat().statusCode(200);
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void postNegative() {
         Map<String, Object> request = statusData.postNegative1();
 
@@ -93,7 +95,9 @@ public class OrganizationStatusServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void postNegative2() {
         Map<String, Object> request = statusData.postNegative2();
 
@@ -101,7 +105,9 @@ public class OrganizationStatusServiceTest extends Login {
         response.then().assertThat().statusCode(406);
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void postWithSpaceName() {
         // UserGroupTypeServicePojo requestBody = new UserGroupTypeServicePojo(null, "   ", "Space Character");
         UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
@@ -118,7 +124,9 @@ public class OrganizationStatusServiceTest extends Login {
 
     }
 
-    @org.testng.annotations.Test
+    @Test(
+            groups = {"regression"}
+    )
     public void postWithSpecialChName() {
 
         UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
@@ -133,7 +141,9 @@ public class OrganizationStatusServiceTest extends Login {
         Assert.assertEquals(requestBody.get("description"), actualBody.get("description"));
     }
 
-    @org.testng.annotations.Test
+    @Test(
+            groups = {"regression"}
+    )
     public void postNumChName() {
 
         UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
@@ -149,7 +159,9 @@ public class OrganizationStatusServiceTest extends Login {
 
     }
 
-        @Test
+        @Test(
+                groups = {"regression"}
+        )
     public void put() {
         OrganizationStatusServiceData statusData = new OrganizationStatusServiceData();
         Map<String, Object> request = statusData.post2();
@@ -171,7 +183,9 @@ public class OrganizationStatusServiceTest extends Login {
     }
 
 
-    @org.testng.annotations.Test
+    @Test(
+            groups = {"regression"}
+    )
     public void putNegative() {
         try {
             Reusable.putMethod("organizationStatusURL", 3000);
@@ -183,7 +197,9 @@ public class OrganizationStatusServiceTest extends Login {
         }
     }
 
-    @Test
+    @Test(
+            groups = {"smoke,regression"}
+    )
     public void delete() {
         OrganizationStatusServiceData statusData = new OrganizationStatusServiceData();
         Map<String, Object> request = statusData.post();

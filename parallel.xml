@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Parallel Test Suite" parallel="classes" thread-count="4">
+    <test name="Paralel Test">
+
+        <classes>
+            <class name="com.tests.allure.CountryServiceTest" />
+            <class name="com.tests.allure.MembershipServiceTest" />
+            <class name="com.tests.allure.MembershipTypeServiceTest" />
+            <class name="com.tests.allure.OrganizationServiceTest" />
+            <class name="com.tests.allure.OrganizationStatusServiceTest" />
+            <class name="com.tests.allure.PermissionServiceTest" />
+            <class name="com.tests.allure.RoleServiceTest" />
+            <class name="com.tests.allure.UserGroupServiceTest" />
+            <class name="com.tests.allure.UserGroupTypeServiceTest" />
+            <class name="com.tests.allure.UserServiceTest" />
+            <class name="com.tests.allure.UserStatusServiceTest" />
+        </classes>
+    </test>
+
+
+</suite>
