@@ -36,7 +36,9 @@ public class OrganizationServiceTest extends Login {
 
     public static OrganizationServiceData expectedBody = new OrganizationServiceData();
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void getOrganization() {
 
 
@@ -48,7 +50,9 @@ public class OrganizationServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"smoke,regression"}
+    )
     public void PostOrganizationService() {
 
 
@@ -82,7 +86,9 @@ public class OrganizationServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void GetOrganizationId() {
 
         Response response = Reusable.getIDMethod("organizationURL",187);
@@ -94,7 +100,9 @@ public class OrganizationServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void OrganizationPut() {
 
 
@@ -130,7 +138,9 @@ public class OrganizationServiceTest extends Login {
 
 
 
-   @Test
+   @Test(
+           groups = {"regression"}
+   )
     public void negatifPost(){
 
        HashMap<String, Object> requestBody = expectedBody.expectedData();
@@ -155,7 +165,9 @@ public class OrganizationServiceTest extends Login {
    }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void negatifnamePost(){
 
         HashMap<String, Object> reqBody = expectedBody.expectedDataN(null,"",43,"team");
@@ -172,7 +184,9 @@ public class OrganizationServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void negatiffounderIdPost(){
 
         HashMap<String, Object> reqBody = expectedBody.expectedDataN(null,"team07",null,"team");

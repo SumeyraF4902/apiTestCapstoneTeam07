@@ -18,7 +18,9 @@ import static org.hamcrest.Matchers.hasItems;
 
 public class UserGroupServiceTest extends Login {
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void getTestAllGroup() {
         Response response = Reusable.getMethod("usergroupURL");
 
@@ -32,7 +34,9 @@ public class UserGroupServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void getTestUserGroupById() {
         Response response = Reusable.getIDMethod("usergroupURL", String.valueOf(118));
         response.
@@ -45,7 +49,9 @@ public class UserGroupServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"smoke, regression"}
+    )
     public void postTestAddNewUser() {
 
         UserGroupServiceData data = new UserGroupServiceData();
@@ -65,7 +71,9 @@ public class UserGroupServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void putTestUpdateExistingUserGroup() {
         //önce post 
         UserGroupServiceData data = new UserGroupServiceData();
@@ -89,7 +97,9 @@ public class UserGroupServiceTest extends Login {
         Reusable.deleteMethod("usergroupURL", actualPut.getInt("id"));
     }
 
-    @Test
+    @Test(
+            groups = {"smoke, regression"}
+    )
     public void DeleteExistingUserGroupbyId() {
 
         //önce post
@@ -107,7 +117,9 @@ public class UserGroupServiceTest extends Login {
            }
 
 
-    @Test
+    @Test(
+            groups = {"smoke, regression"}
+    )
     public void PostTestAddUser() {
         UserGroupServiceData data = new UserGroupServiceData();
         Map<String, String> expectedPost = data.expectedUserPostData("goodness@gmail.com", "goodness@gmail.com");
@@ -127,7 +139,9 @@ public class UserGroupServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"smoke, regression"}
+    )
     public void deleteTestUser() {
         UserGroupServiceData data = new UserGroupServiceData();
         Map<String, String> expectedPost = data.expectedUserPostData("goodness@gmail.com", "goodness@gmail.com");

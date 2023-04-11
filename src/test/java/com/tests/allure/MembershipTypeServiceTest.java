@@ -21,7 +21,9 @@ public class MembershipTypeServiceTest extends Login {
 
     MembershipTypeServiceData memberTypService = new MembershipTypeServiceData();
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void GET_TC001_MembershipTypeAppID(){
 
         Response response = Reusable.getMethod("getMembershipType");
@@ -35,7 +37,9 @@ public class MembershipTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void GET_TC002_MembershipType(){
 
         Response response = Reusable.getMethod(url);
@@ -50,7 +54,9 @@ public class MembershipTypeServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"smoke,regression"}
+    )
     public void POST_TC003_AddNewUser(){
 
 
@@ -74,7 +80,9 @@ public class MembershipTypeServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void PUT_TC004_UpdateExistingUser() {
 
         Map<String,Object> reqBody =
@@ -111,7 +119,9 @@ public class MembershipTypeServiceTest extends Login {
         response.then().assertThat().statusCode(200);
 
     }
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void GET_TC005_MembershipTypeID(){
         Map<String,Object> reqBody =
                 memberTypService.setupDataMemberShipTypeService(faker.howIMetYourMother().character(),true,2);
@@ -145,7 +155,9 @@ public class MembershipTypeServiceTest extends Login {
         response.then().assertThat().statusCode(200);
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void GET_TC006_MembershipTypeDelete(){
         Map<String,Object> reqBody =
                 memberTypService.setupDataMemberShipTypeService(faker.howIMetYourMother().character(),true,2);

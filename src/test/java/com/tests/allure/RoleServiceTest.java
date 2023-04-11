@@ -20,7 +20,9 @@ public class RoleServiceTest extends Login {
 
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
 
     public void getRolesList() {
 
@@ -40,7 +42,9 @@ public class RoleServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void getRolesID26() {
 
 
@@ -52,7 +56,9 @@ public class RoleServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void getRolesID27() {
 
         Response response = Reusable.getMethod("rolesURL27");
@@ -67,7 +73,9 @@ public class RoleServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void getRolesID30() {
 
         Response response = Reusable.getMethod("rolesURL30");
@@ -77,7 +85,9 @@ public class RoleServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
 
     public void getRolesID11() {
 

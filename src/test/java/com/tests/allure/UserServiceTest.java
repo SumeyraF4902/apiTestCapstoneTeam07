@@ -21,7 +21,9 @@ public class UserServiceTest extends Login {
 
     String url = "userserviceGetAllUsersURL";
 
-    @Test
+    @Test(
+            groups = {"smoke, regression"}
+    )
     public void postRegisterNewUserAdd () {
 
         Map<String, Object> requestBody = userService.
@@ -49,7 +51,9 @@ public class UserServiceTest extends Login {
         response.then().assertThat().statusCode(404);
 
     }
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void postRegisterNewUserAddNegativeOne () {
 
         Map<String, Object> requestBody = userService.
@@ -79,7 +83,9 @@ public class UserServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void gettApiUser () {
 
         Response response = Reusable.getMethod("userserviceGetAllUsersURL");
@@ -95,7 +101,9 @@ public class UserServiceTest extends Login {
     }
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void gettUserId () {
 
         Response response = Reusable.getIDMethod("userserviceGetAllUsersURL","434");
@@ -113,7 +121,9 @@ public class UserServiceTest extends Login {
 
 
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void putUserEmailNotChanged () {
 
         Map<String, Object> requestBody = userService.
@@ -140,7 +150,9 @@ public class UserServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void putUserNamenotChanged () {
 
         String email = faker.internet().emailAddress();
@@ -168,7 +180,9 @@ public class UserServiceTest extends Login {
         response.then().assertThat().statusCode(200);
     }
 
-    @Test
+    @Test(
+            groups = {"smoke"}
+    )
     public void deleteUser () {
 
         Map<String, Object> requestBody = userService.
@@ -194,7 +208,9 @@ public class UserServiceTest extends Login {
 
     }
 
-    @Test
+    @Test(
+            groups = {"regression"}
+    )
     public void postRegisterNewUserAddNegativeTwo () {
 
         Map<String, Object> requestBody = userService.

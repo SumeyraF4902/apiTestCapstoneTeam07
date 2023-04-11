@@ -4,6 +4,8 @@ package com.tests.allure;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import pages.Login;
 import testData.CountryServiceData;
 import utilities.JsonToJava;
@@ -18,7 +20,9 @@ public class CountryServiceTest extends Login{
 
 
 
-    @org.testng.annotations.Test
+    @Test(
+            groups = {"regression"}
+    )
     public void getAllCountry(){
 
 
@@ -35,7 +39,9 @@ public class CountryServiceTest extends Login{
 
     }
 
-    @org.testng.annotations.Test
+    @Test(
+            groups = {"regression"}
+    )
     public void getIDCountry(){
 
 
@@ -55,7 +61,9 @@ public class CountryServiceTest extends Login{
 
     }
 
-    @org.testng.annotations.Test
+    @Test(
+            groups = {"regression"}
+    )
     public void getNonIDCountry(){
 
        Response response =  Reusable.getMethod("nonCountryURL");
