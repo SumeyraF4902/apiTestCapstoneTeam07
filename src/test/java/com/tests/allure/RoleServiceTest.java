@@ -48,7 +48,7 @@ public class RoleServiceTest extends Login {
     public void getRolesID26() {
 
 
-        Response response = Reusable.getMethod("rolesURL26");
+        Response response = Reusable.getIDMethod("rolesIdURL",26);
         response.then().assertThat().statusCode(200).contentType(ContentType.JSON).
                 body("permissions.id", hasItem(498));
 
@@ -61,7 +61,7 @@ public class RoleServiceTest extends Login {
     )
     public void getRolesID27() {
 
-        Response response = Reusable.getMethod("rolesURL27");
+        Response response = Reusable.getIDMethod("rolesIdURL",27);
         response.then().assertThat().statusCode(200).contentType(ContentType.JSON).
                 body("id", equalTo(27), "name", equalTo("Logistics Personnel"),
                         "permissions.id", hasItem(498), "permissions.resource", hasItems("company", "country", "dashboard", "handmade",
@@ -78,7 +78,7 @@ public class RoleServiceTest extends Login {
     )
     public void getRolesID30() {
 
-        Response response = Reusable.getMethod("rolesURL30");
+        Response response = Reusable.getIDMethod("rolesIdURL",30);
         response.then().assertThat().statusCode(200).contentType(ContentType.JSON).
                 body("id", equalTo(30), "name", equalTo("Customer"));
 
@@ -89,10 +89,10 @@ public class RoleServiceTest extends Login {
             groups = {"regression"}
     )
 
-    public void getRolesID11() {
+    public void getRolesNegatif() {
 
-        Response response = Reusable.getMethod("rolesURL11");
-        response.then().assertThat().statusCode(404).contentType(ContentType.JSON);
+        Response response = Reusable.getIDMethod("rolesIdURL",11);
+        response.then().assertThat().statusCode(404);
 
 
 }

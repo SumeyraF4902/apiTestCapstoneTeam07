@@ -1,209 +1,24 @@
-package com.tests.allure;
-
-import com.github.fge.jsonschema.core.processing.ProcessorSelectorPredicate;
-import com.github.fge.jsonschema.core.report.MessageProvider;
-import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
-import org.hamcrest.Matchers;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-import pages.Login;
-import pojoDatas.OrganizationServicePojo;
-import testData.OrganizationServiceData;
-import utilities.ConfigReader;
-import utilities.JsonToJava;
-import utilities.Reusable;
-
-import java.sql.SQLOutput;
-import java.util.HashMap;
-import java.util.Map;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.core.IsIterableContaining.hasItem;
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
-import static utilities.Reusable.getMethod;
-
-public class OrganizationServiceTest extends Login {
-
-    public static Integer id;
-
-
-
-    public static Response responsePost;
-
-    public static OrganizationServiceData expectedBody = new OrganizationServiceData();
-
-    @Test(
-            groups = {"regression"}
-    )
-    public void getOrganization() {
-
-
-        Response response =  Reusable.getMethod("organizationURL");
-
-        response.then().assertThat().statusCode(404);
-
-
-
-    }
-
-    @Test(
-            groups = {"smoke,regression"}
-    )
-    public void PostOrganizationService() {
-
-
-        HashMap<String, Object> requestBody = expectedBody.expectedData();
-
-        System.out.println("requestBody = " + requestBody);
-
-        responsePost = Reusable.postMethod("organizationURL", requestBody);
-
-        responsePost.then().assertThat().statusCode(201);
-
-        HashMap<String, Object> actualData = JsonToJava.convertJsonToJavaObject(responsePost.asString(), HashMap.class);
-
-        System.out.println("actualData = " + actualData);
-
-        assertEquals(requestBody.get("name"), actualData.get("name"));
-
-        id = (int) actualData.get("id");
-
-        responsePost = Reusable.deleteMethod("organizationURL", id);
-
-        responsePost.then().assertThat().statusCode(200);
-
-        requestBody.put("id", id);
-
-        Response response =  Reusable.putMethod("organizationURL",requestBody);
-
-        response.then().assertThat().statusCode(404);
-
-
-    }
-
-
-    @Test(
-            groups = {"regression"}
-    )
-    public void GetOrganizationId() {
-
-        Response response = Reusable.getIDMethod("organizationURL",187);
-
-        response.then().assertThat().statusCode(200).
-                contentType(ContentType.JSON).body("id", Matchers.equalTo(187));
-
-
-    }
-
-
-    @Test(
-            groups = {"regression"}
-    )
-    public void OrganizationPut() {
-
-
-        HashMap<String, Object> requestBody = expectedBody.expectedData();
-
-        responsePost = Reusable.postMethod("organizationURL", requestBody);
-
-        HashMap<String, Object> actualDataPost = JsonToJava.convertJsonToJavaObject(responsePost.asString(), HashMap.class);
-
-        Integer id2 = (int) actualDataPost.get("id");
-
-        HashMap<String, Object> requestBodyPut = expectedBody.expectedDataPut();
-
-        requestBodyPut.put("id", id2);
-
-        Response responsePut = Reusable.putMethod("organizationURL", requestBodyPut);
-
-        HashMap<String, Object> actualDataPut = JsonToJava.convertJsonToJavaObject(responsePut.asString(), HashMap.class);
-
-        System.out.println("actualData = " + actualDataPut);
-
-        assertEquals(requestBodyPut.get("name"), actualDataPut.get("name"));
-
-        responsePut = Reusable.deleteMethod("organizationURL", id2);
-
-        responsePut.then().assertThat().statusCode(200);
-
-
-
-
-
-    }
-
-
-
-   @Test(
-           groups = {"regression"}
-   )
-    public void negatifPost(){
-
-       HashMap<String, Object> requestBody = expectedBody.expectedData();
-
-       responsePost = Reusable.postMethod("organizationURL", requestBody);
-
-       HashMap<String, Object> actualData = JsonToJava.convertJsonToJavaObject(responsePost.asString(), HashMap.class);
-
-       System.out.println("actualData = " + actualData);
-
-       Integer id = (int) actualData.get("id");
-
-       Response response =  Reusable.getIDMethod("organizationURL",id);
-
-       response.then().assertThat().statusCode(404);
-
-       responsePost = Reusable.deleteMethod("organizationURL", id);
-
-       responsePost.then().assertThat().statusCode(200);
-
-
-   }
-
-
-    @Test(
-            groups = {"regression"}
-    )
-    public void negatifnamePost(){
-
-        HashMap<String, Object> reqBody = expectedBody.expectedDataN(null,"",43,"team");
-
-        System.out.println("reqBody = " + reqBody);
-
-        Response response= Reusable.postMethod("organizationURL",reqBody);
-
-        response.then().assertThat().statusCode(406);
-
-        response.then().assertThat().body("error",equalTo("Not Acceptable"));
-
-
-
-    }
-
-    @Test(
-            groups = {"regression"}
-    )
-    public void negatiffounderIdPost(){
-
-        HashMap<String, Object> reqBody = expectedBody.expectedDataN(null,"team07",null,"team");
-
-        System.out.println("reqBody = " + reqBody);
-
-        Response response= Reusable.postMethod("organizationURL",reqBody);
-
-        response.then().assertThat().statusCode(406);
-
-        response.then().assertThat().body("error",equalTo("Not Acceptable"));
-
-
-
-
-    }
-
-
-
-}
+countryURL = https://a3m-qa-gm3.quaspareparts.com/auth/api/country
+germanyURL = https://a3m-qa-gm3.quaspareparts.com/auth/api/country/DE
+nonCountryURL = https://a3m-qa-gm3.quaspareparts.com/auth/api/country/XX
+membershipServiceUrl = https://qa-gm3.quaspareparts.com/a3m/auth/api/membership
+getMembershipServiceUrl = https://qa-gm3.quaspareparts.com/a3m/auth/api/membership?userId=332
+getMembershipServiceSuspendUrl = https://a3m-qa-gm3.quaspareparts.com/auth/api/membership?subscription_id= "952998d4-b453-4aca-8606-7e7e9b3acc5f"/suspend
+putMembershipServiceRoleUrl = https://a3m-qa-gm3.quaspareparts.com/auth/api/membership/role
+getMembershipType = https://a3m-qa-gm3.quaspareparts.com/auth/api/application/2/membership-type
+getAllMembershipType = https://a3m-qa-gm3.quaspareparts.com/auth/api/membership-type
+organizationURL = https://a3m-qa-gm3.quaspareparts.com/auth/api/organization
+organizationStatusURL = https://a3m-qa-gm3.quaspareparts.com/auth/api/organization-status
+organizationStatusIdURL = https://a3m-qa-gm3.quaspareparts.com/auth/api/organization-status/105
+rolesURL=https://a3m-qa-gm3.quaspareparts.com/auth/api/application/2/role
+rolesIdURL=https://a3m-qa-gm3.quaspareparts.com/auth/api/role
+permissionURL=https://a3m-qa-gm3.quaspareparts.com/auth/api/permission
+usergroupURL    =   https://a3m-qa-gm3.quaspareparts.com/auth/api/user-group
+userGroupAddUserURL =   https://a3m-qa-gm3.quaspareparts.com/auth/api/organization/187/user-group/118/user/395
+userGroupDeleteUserURL  =   https://a3m-qa-gm3.quaspareparts.com/auth/api/organization/187/user-group/118/user
+userGroupTypeURL = https://a3m-qa-gm3.quaspareparts.com/auth/api/user-group-type
+userserviceAddNewUserURL = https://a3m-qa-gm3.quaspareparts.com/auth/api/organization/187/application/2/role/5/user
+userserviceGetAllUserOfOrgURL = https://a3m-qa-gm3.quaspareparts.com/auth/api/organization/1/user
+userserviceGetAllUsersURL = https://a3m-qa-gm3.quaspareparts.com/auth/api/user
+userserviceRegisterUser = https://qa-gm3.quaspareparts.com/a3m/auth/api/user/register
+userStatus = https://a3m-qa-gm3.quaspareparts.com/auth/api/user-status
