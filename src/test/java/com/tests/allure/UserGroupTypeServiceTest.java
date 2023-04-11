@@ -12,7 +12,7 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Login;
-import pojoDatas.UserGroupTypeServicePojo;
+
 import testData.UserGroupTypeServiceData;
 import utilities.JsonToJava;
 import utilities.Reusable;

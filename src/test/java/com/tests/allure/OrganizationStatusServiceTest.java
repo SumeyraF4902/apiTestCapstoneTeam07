@@ -9,7 +9,7 @@ import org.hamcrest.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Login;
-import pojoDatas.OrganizationStatusServicePojo;
+
 import testData.OrganizationStatusServiceData;
 import testData.UserGroupTypeServiceData;
 import utilities.ConfigReader;

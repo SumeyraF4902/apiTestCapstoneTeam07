@@ -7,7 +7,7 @@ import org.openqa.selenium.bidi.log.Log;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Login;
-import pojoDatas.RoleServicePojo;
+
 import utilities.Reusable;
 
 import java.awt.*;
