@@ -6,7 +6,7 @@
             <class name="com.tests.allure.CountryServiceTest" />
             <class name="com.tests.allure.MembershipServiceTest" />
             <class name="com.tests.allure.MembershipTypeServiceTest" />
-            <class name="com.tests.allure.O" />
+            <class name="com.tests.allure.OrganizationServiceTest" />
             <class name="com.tests.allure.OrganizationStatusServiceTest" />
             <class name="com.tests.allure.PermissionServiceTest" />
             <class name="com.tests.allure.RoleServiceTest" />
