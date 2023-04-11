@@ -34,7 +34,7 @@ public class OrganizationServiceData {
 
 
      expectedData.put("id",null);
-     expectedData.put("name","Team00007");
+     expectedData.put("name","TEAM0007");
      expectedData.put("founder_id",43);
      expectedData.put("address","Poland");
      expectedData.put("short_name","team");

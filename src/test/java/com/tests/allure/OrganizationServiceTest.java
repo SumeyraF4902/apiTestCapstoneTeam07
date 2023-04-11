@@ -131,11 +131,13 @@ public class OrganizationServiceTest extends Login {
 
 
    @Test
-    public void negatifPost(){
+    public void negatifPostGet(){
 
        HashMap<String, Object> requestBody = expectedBody.expectedData();
 
        responsePost = Reusable.postMethod("organizationURL", requestBody);
+
+       responsePost.then().assertThat().statusCode(201);
 
        HashMap<String, Object> actualData = JsonToJava.convertJsonToJavaObject(responsePost.asString(), HashMap.class);
 
