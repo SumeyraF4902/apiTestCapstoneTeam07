@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
@@ -38,20 +39,11 @@ public class OrganizationServiceTest extends Login {
     @Test
     public void getOrganization() {
 
-        try {
 
-            Reusable.getMethod("organizationURL");
+        Response response =  Reusable.getMethod("organizationURL");
 
-            Assert.assertTrue(false);
+        response.then().assertThat().statusCode(404);
 
-
-        } catch (Exception e) {
-
-            System.out.println("Exception = 404 not Found");
-
-            Assert.assertTrue(true);
-
-        }
 
 
     }
@@ -66,10 +58,11 @@ public class OrganizationServiceTest extends Login {
 
         responsePost = Reusable.postMethod("organizationURL", requestBody);
 
+        responsePost.then().assertThat().statusCode(201);
+
         HashMap<String, Object> actualData = JsonToJava.convertJsonToJavaObject(responsePost.asString(), HashMap.class);
 
         System.out.println("actualData = " + actualData);
-
 
         assertEquals(requestBody.get("name"), actualData.get("name"));
 
@@ -81,20 +74,9 @@ public class OrganizationServiceTest extends Login {
 
         requestBody.put("id", id);
 
-        try {
+        Response response =  Reusable.putMethod("organizationURL",requestBody);
 
-            Reusable.putMethod("organizationURL", requestBody);
-
-            Assert.assertTrue(true);
-
-
-        } catch (Exception e) {
-
-            System.out.println("Exception = 404 not Found");
-
-            Assert.assertTrue(true);
-
-        }
+        response.then().assertThat().statusCode(404);
 
 
     }
@@ -103,7 +85,7 @@ public class OrganizationServiceTest extends Login {
     @Test
     public void GetOrganizationId() {
 
-        Response response = Reusable.getMethod("organizationURL{id}");
+        Response response = Reusable.getIDMethod("organizationURL",187);
 
         response.then().assertThat().statusCode(200).
                 contentType(ContentType.JSON).body("id", Matchers.equalTo(187));
@@ -161,20 +143,9 @@ public class OrganizationServiceTest extends Login {
 
        Integer id = (int) actualData.get("id");
 
-       try {
+       Response response =  Reusable.getIDMethod("organizationURL",id);
 
-           Reusable.getIDMethod("organizationURL",id);
-
-           Assert.assertTrue(false);
-
-
-       } catch (Exception e) {
-
-           System.out.println("Exception = 406 Not Acceptable");
-
-           Assert.assertTrue(true);
-
-       }
+       response.then().assertThat().statusCode(404);
 
        responsePost = Reusable.deleteMethod("organizationURL", id);
 
@@ -184,6 +155,40 @@ public class OrganizationServiceTest extends Login {
    }
 
 
+    @Test
+    public void negatifnamePost(){
+
+        HashMap<String, Object> reqBody = expectedBody.expectedDataN(null,"",43,"team");
+
+        System.out.println("reqBody = " + reqBody);
+
+        Response response= Reusable.postMethod("organizationURL",reqBody);
+
+        response.then().assertThat().statusCode(406);
+
+        response.then().assertThat().body("error",equalTo("Not Acceptable"));
+
+
+
+    }
+
+    @Test
+    public void negatiffounderIdPost(){
+
+        HashMap<String, Object> reqBody = expectedBody.expectedDataN(null,"team07",null,"team");
+
+        System.out.println("reqBody = " + reqBody);
+
+        Response response= Reusable.postMethod("organizationURL",reqBody);
+
+        response.then().assertThat().statusCode(406);
+
+        response.then().assertThat().body("error",equalTo("Not Acceptable"));
+
+
+
+
+    }
 
 
 

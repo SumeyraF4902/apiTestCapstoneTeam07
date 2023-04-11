@@ -157,6 +157,7 @@ public class UserStatusServiceTest extends Login{
         Response response= Reusable.postMethod(url,reqBody);
 
         response.then().assertThat().statusCode(406);
+        response.prettyPrint();
 
         response.then().assertThat().body("error",equalTo("Not Acceptable"));
 

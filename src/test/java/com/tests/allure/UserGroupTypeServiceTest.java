@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 import static org.testng.Assert.assertEquals;
 
@@ -30,7 +31,7 @@ public class UserGroupTypeServiceTest extends Login {
     UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
     Faker faker = new Faker();
 
-    /* TÜM GET */
+
     @Test
     public void getTestAllUserGroupType() {
         Response response = Reusable.getMethod("userGroupTypeURL");
@@ -45,25 +46,29 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    /* ID Lİ GET */
+
     @Test
     public void getTestUserGroupTypeById() {
-
         Map<String, Object> requestBody = testData.expectedDataSetUp(faker.company().industry(), faker.company().catchPhrase());
 
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
         Map<String, Object> actualBody = response.as(HashMap.class);
         Integer id = (Integer) actualBody.get("id");
-        Reusable.deleteMethod("userGroupTypeURL", id);
 
         response = Reusable.getIDMethod("userGroupTypeURL", id);
-        response.then().assertThat().statusCode(404);
+        response.
+                then().
+                assertThat().
+                statusCode(200).
+                contentType(ContentType.JSON).
+                body("id", equalTo(id));
+
+        Reusable.deleteMethod("userGroupTypeURL",id);
     }
 
-    /* ID SİZ GET */
+
     @Test
     public void getTestUserGroupTypeByNoId() {
-
         Map<String, Object> requestBody = testData.expectedDataSetUp(faker.company().industry(), faker.company().catchPhrase());
 
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
@@ -75,11 +80,10 @@ public class UserGroupTypeServiceTest extends Login {
         response.then().assertThat().statusCode(404);
     }
 
-    @org.testng.annotations.Test
-    public void postTestAddNewUserType() {
 
-        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
-        Map<String, Object> requestBody = testData.expectedDataSetUp("Group07", "Students");
+    @Test
+    public void postTestAddNewUserType() {
+        Map<String, Object> requestBody = testData.expectedDataSetUp(faker.company().industry(), faker.company().catchPhrase());
 
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
 
@@ -89,23 +93,13 @@ public class UserGroupTypeServiceTest extends Login {
         assertEquals(requestBody.get("description"), actualBody.get("description"));
 
         Reusable.deleteMethod("userGroupTypeURL", actualBody.get("id"));
-        try {
-            Reusable.getIDMethod("userGroupTypeURL", actualBody.get("id"));
-            Assert.assertTrue(false);
-
-        } catch (Exception e) {
-            System.out.println("Exception = 404 not Found");
-            Assert.assertTrue(true);
-        }
-
 
     }
 
-    @Test
-    public void postTestAddNewUserTypeWithID() {
 
-        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
-        Map<String, Object> requestBody = testData.expectedDataIdSetUp(77, "Education07", "Organization of Education");
+    @Test
+    public void postTestAddNewUserTypeByID() {
+        Map<String, Object> requestBody = testData.expectedDataIdSetUp(faker.number().numberBetween(4, 100), faker.company().industry(), faker.company().catchPhrase());
 
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
         response.
@@ -113,12 +107,23 @@ public class UserGroupTypeServiceTest extends Login {
                 assertThat().
                 statusCode(406);
     }
+
+
+    @Test
+    public void postTestAddNewUserTypeWithNullName() {
+        Map<String, Object> requestBody = testData.expectedDataSetUp(null, faker.company().catchPhrase());
+
+        Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
+        response.
+                then().
+                assertThat().
+                statusCode(400);
+    }
+
 
     @Test
     public void postTestAddNewUserTypeWithEmptyName() {
-
-        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
-        Map<String, Object> requestBody = testData.expectedDataSetUp("", "Organization of Education");
+        Map<String, Object> requestBody = testData.expectedDataSetUp("", faker.company().catchPhrase());
 
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
         response.
@@ -127,9 +132,9 @@ public class UserGroupTypeServiceTest extends Login {
                 statusCode(406);
     }
 
+
     @Test
     public void postTestAddNewUserTypeWith3SpaceName() {
-        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
         Map<String, Object> requestBody = testData.expectedDataSetUp("   ", "Space Character");
 
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
@@ -144,10 +149,8 @@ public class UserGroupTypeServiceTest extends Login {
     }
 
 
-    @org.testng.annotations.Test
+    @Test
     public void postTestAddNewUserTypeWithSpecialCharacterName() {
-
-        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
         Map<String, Object> requestBody = testData.expectedDataSetUp("?*/%", "Special Character");
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
 
@@ -160,10 +163,9 @@ public class UserGroupTypeServiceTest extends Login {
         Reusable.deleteMethod("userGroupTypeURL", actualBody.get("id"));
     }
 
+
     @Test
     public void postTestAddNewUserTypeWithNumericCharacterName() {
-
-        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
         Map<String, Object> requestBody = testData.expectedDataSetUp("12345", "Numeric Character");
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
 
@@ -176,10 +178,10 @@ public class UserGroupTypeServiceTest extends Login {
         Reusable.deleteMethod("userGroupTypeURL", actualBody.get("id"));
     }
 
+
     @Test
     public void postTestAddNewUserTypeWithEmptyDescription() {
-        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
-        Map<String, Object> requestBody = testData.expectedDataSetUp("Edu07", null);
+        Map<String, Object> requestBody = testData.expectedDataSetUp(faker.company().industry(), null);
 
         Response response = Reusable.postMethod("userGroupTypeURL", requestBody);
 
@@ -193,17 +195,16 @@ public class UserGroupTypeServiceTest extends Login {
 
     }
 
-    @org.testng.annotations.Test
-    public void putTestUpdateUserGroupType() {
 
-        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
-        Map<String, Object> requestPostBody = testData.expectedDataSetUp("NewGroup07", "Students");
+    @Test
+    public void putTestUpdateUserGroupType() {
+        Map<String, Object> requestPostBody = testData.expectedDataSetUp(faker.company().industry(), faker.company().catchPhrase());
 
         Response responsePost = Reusable.postMethod("userGroupTypeURL", requestPostBody);
         JsonPath actualPostBody = responsePost.jsonPath();
         Integer id = actualPostBody.getInt("id");
 
-        Map<String, Object> requestBody = testData.expectedDataIdSetUp(id, "NewGroup07", "Students of Software");
+        Map<String, Object> requestBody = testData.expectedDataIdSetUp(id, faker.company().buzzword(), faker.company().catchPhrase());
 
         Response response = Reusable.putMethod("userGroupTypeURL", requestBody);
 
@@ -217,52 +218,166 @@ public class UserGroupTypeServiceTest extends Login {
 
     }
 
-    @org.testng.annotations.Test
-    public void putTestUpdateNoUserGroupType() {
-        UserGroupTypeServiceData testData = new UserGroupTypeServiceData();
-        Map<String, Object> expectedBody = testData.expectedDataIdSetUp(0, "Nothing", "Description");
 
-        try {                                                              // karakter sınırı var mı ?
-            Reusable.putMethod("userGroupTypeURL", expectedBody);      // ıd 0 ve negatifide ekle ?
-            Assert.assertTrue(false);
+    @Test
+    public void putTestUpdateUserGroupTypeById() {
+        Map<String, Object> expectedBody = testData.expectedDataIdSetUp(0, faker.company().buzzword(), faker.company().catchPhrase());
 
-        } catch (Exception e) {
-            System.out.println("Exception = 404 not Found");
-            Assert.assertTrue(true);
-        }
+        Response response = Reusable.putMethod("userGroupTypeURL", expectedBody);
+        response.then().assertThat().statusCode(404);
     }
 
 
-    @org.testng.annotations.Test
-    public void getTestNoUserGroupType() {
-        try {
-            Reusable.getMethod("userGroupTypeIdURL");
-            Assert.assertTrue(true);
+    @Test
+    public void putTestUpdateJustNameUserGroupType() {
+        Map<String, Object> requestPostBody = testData.expectedDataSetUp(faker.company().industry(), "same description");
 
-        } catch (Exception e) {
-            System.out.println("Exception = 404 not Found");
-            Assert.assertTrue(true);
-        }
+        Response responsePost = Reusable.postMethod("userGroupTypeURL", requestPostBody);
+        JsonPath actualPostBody = responsePost.jsonPath();
+        Integer id = actualPostBody.getInt("id");
+
+        Map<String, Object> requestBody = testData.expectedDataIdSetUp(id, faker.company().buzzword(), "same description");
+
+        Response response = Reusable.putMethod("userGroupTypeURL", requestBody);
+
+        Map<String, Object> actualBody = JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
+
+        assertEquals(requestBody.get("id"), actualBody.get("id"));
+        assertEquals(requestBody.get("name"), actualBody.get("name"));
+        assertEquals(requestBody.get("description"), actualBody.get("description"));
+
+        Reusable.deleteMethod("userGroupTypeURL", actualBody.get("id"));
+
     }
 
 
-    @org.testng.annotations.Test
-    public void deleteTestUserGroupType() {
+    @Test
+    public void putTestUpdateJustDescriptionUserGroupType() {
+        Map<String, Object> requestPostBody = testData.expectedDataSetUp("Group07", faker.company().catchPhrase());
 
-        Response response = Reusable.deleteMethod("userGroupTypeURL", 31);
+        Response responsePost = Reusable.postMethod("userGroupTypeURL", requestPostBody);
+        JsonPath actualPostBody = responsePost.jsonPath();
+        Integer id = actualPostBody.getInt("id");
+
+        Map<String, Object> requestBody = testData.expectedDataIdSetUp(id, "Group07", faker.company().buzzword());
+
+        Response response = Reusable.putMethod("userGroupTypeURL", requestBody);
+
+        Map<String, Object> actualBody = JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
+
+        assertEquals(requestBody.get("id"), actualBody.get("id"));
+        assertEquals(requestBody.get("name"), actualBody.get("name"));
+        assertEquals(requestBody.get("description"), actualBody.get("description"));
+
+        Reusable.deleteMethod("userGroupTypeURL", actualBody.get("id"));
+    }
+
+
+
+    @Test
+    public void deleteTestUserGroupTypeById() {
+        Map<String, Object> requestPostBody = testData.expectedDataSetUp(faker.company().industry(), faker.company().catchPhrase());
+
+        Response responsePost = Reusable.postMethod("userGroupTypeURL", requestPostBody);
+        JsonPath actualPostBody = responsePost.jsonPath();
+        Integer id = actualPostBody.getInt("id");
+
+        Reusable.deleteMethod("userGroupTypeURL", id);
+        Response response = Reusable.getIDMethod("userGroupTypeURL", id);
+        response.then().assertThat().statusCode(404);
+    }
+
+
+    @Test
+    public void deleteTestUserGroupTypeByNoId() {
+        Map<String, Object> requestPostBody = testData.expectedDataSetUp(faker.company().industry(), faker.company().catchPhrase());
+
+        Response responsePost = Reusable.postMethod("userGroupTypeURL", requestPostBody);
+        JsonPath actualPostBody = responsePost.jsonPath();
+        Integer id = actualPostBody.getInt("id");
+
+        Response response = Reusable.deleteMethod("userGroupTypeURL", id);
         response.then().assertThat().statusCode(200);
+
     }
 
-    @org.testng.annotations.Test
-    public void deleteTestNoUserGroupType() {
-        try {
-            Reusable.putMethod("userGroupTypeURL", 300);
-            Assert.assertTrue(true);
 
-        } catch (Exception e) {
-            System.out.println("Exception = 404 not Found");
-            Assert.assertTrue(true);
-        }
+    @Test
+    public void generalTest() {
+        Map<String, Object> requestPostBody = testData.expectedDataSetUp("General", "not detailed");
+
+        Response responsePost = Reusable.postMethod("userGroupTypeURL", requestPostBody);
+        JsonPath actualPostBody = responsePost.jsonPath();
+        Integer id = actualPostBody.getInt("id");
+
+        Response response = Reusable.getIDMethod("userGroupTypeURL", id);
+        response.
+                then().
+                assertThat().
+                statusCode(200).
+                body("name", equalTo("General"), "description", equalTo("not detailed"));
+
+
+        Map<String, Object> expectedPutBody = testData.expectedDataIdSetUp(id, "Name Changed", "Description Changed");
+        response = Reusable.putMethod("userGroupTypeURL", expectedPutBody);
+
+        response = Reusable.getIDMethod("userGroupTypeURL", id);
+
+        response.
+                then().
+                assertThat().
+                statusCode(200).
+                body("name", equalTo("Name Changed"), "description", equalTo("Description Changed"));
+
+        response = Reusable.deleteMethod("userGroupTypeURL", id);
+
+        response.
+                then().
+                assertThat().
+                statusCode(200);
+
+        response = Reusable.getIDMethod("userGroupTypeURL", id);
+
+        response.
+                then().
+                assertThat().
+                statusCode(404);
+    }
+
+    @Test
+    public void testMaxBounds() {
+       Map<String,Object> expectedBody = testData.expectedDataSetUp(faker.lorem().fixedString(50),faker.lorem().fixedString(104));
+       Response response = Reusable.postMethod("userGroupTypeURL",expectedBody);
+       JsonPath actual = response.jsonPath();
+       Integer id = actual.getInt("id");
+       response.
+               then().
+               assertThat().
+               statusCode(201);
+
+       Reusable.deleteMethod("userGroupTypeURL",id);
+    }
+
+    @Test
+    public void testNameBoundOut() {
+        Map<String,Object> expectedBody = testData.expectedDataSetUp(faker.lorem().fixedString(55),faker.lorem().fixedString(255));
+        Response response = Reusable.postMethod("userGroupTypeURL",expectedBody);
+        JsonPath actual = response.jsonPath();
+        response.
+                then().
+                assertThat().
+                statusCode(500);
+    }
+
+    @Test
+    public void testDescriptionBoundOut() {
+        Map<String,Object> expectedBody = testData.expectedDataSetUp(faker.lorem().fixedString(50),faker.lorem().fixedString(260));
+        Response response = Reusable.postMethod("userGroupTypeURL",expectedBody);
+        JsonPath actual = response.jsonPath();
+        response.
+                then().
+                assertThat().
+                statusCode(500);
     }
 }
 
