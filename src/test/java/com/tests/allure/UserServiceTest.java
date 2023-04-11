@@ -1,7 +1,6 @@
 package com.tests.allure;
 
 import com.github.javafaker.Faker;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -19,19 +18,63 @@ import static org.hamcrest.Matchers.equalTo;
 public class UserServiceTest extends Login {
     UserServiceData userService  = new UserServiceData();
     Faker faker = new Faker();
+
+    String url = "userserviceGetAllUsersURL";
+
     @Test
-    public void postNewUserAdd () {
+    public void postRegisterNewUserAdd () {
 
         Map<String, Object> requestBody = userService.
-                userPostexpectedDataSetUp(faker.name().username(),faker.internet().emailAddress());
+                userPostRegisterexpectedDataSetUp(faker.internet().emailAddress(),187,2,5);
         System.out.println("requestBody = " + requestBody);
 
-        Response response = Reusable.postMethod("userserviceAddNewUserURL",requestBody);
+        Response response = Reusable.postMethod("userserviceRegisterUser",requestBody);
         response.then().assertThat().statusCode(201);
         Map<String,Object> actualBody= JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
         System.out.println("actualBody = " + actualBody);
-        Assert.assertEquals(requestBody.get("username"),actualBody.get("username"));
+
         Assert.assertEquals(requestBody.get("email"),actualBody.get("email"));
+
+        Integer id = (Integer) actualBody.get("id");
+        response = Reusable.getIDMethod(url,id);
+
+        response.then().assertThat().statusCode(200);
+
+        response = Reusable.deleteMethod(url,id);
+
+        response.then().assertThat().statusCode(200);
+
+        response = Reusable.getIDMethod(url,id);
+
+        response.then().assertThat().statusCode(404);
+
+    }
+    @Test
+    public void postRegisterNewUserAddNegativeOne () {
+
+        Map<String, Object> requestBody = userService.
+                userPostRegisterexpectedDataSetUp(faker.funnyName().name(),187,2,5);
+        System.out.println("requestBody = " + requestBody);
+
+        Response response = Reusable.postMethod("userserviceRegisterUser",requestBody);
+        response.then().assertThat().statusCode(201);
+        Map<String,Object> actualBody= JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
+        System.out.println("actualBody = " + actualBody);
+
+        Assert.assertEquals(requestBody.get("email"),actualBody.get("email"));
+
+        Integer id = (Integer) actualBody.get("id");
+        response = Reusable.getIDMethod(url,id);
+
+        response.then().assertThat().statusCode(200);
+
+        response = Reusable.deleteMethod(url,id);
+
+        response.then().assertThat().statusCode(200);
+
+        response = Reusable.getIDMethod(url,id);
+
+        response.then().assertThat().statusCode(404);
 
     }
 
@@ -45,7 +88,7 @@ public class UserServiceTest extends Login {
                 statusCode(200);
         List<HashMap<String, Object>> allUsers = response.jsonPath().getList("id");
 
-        Assert.assertTrue(allUsers.contains(73));
+        Assert.assertTrue(allUsers.contains(332));
 
 
 
@@ -55,10 +98,10 @@ public class UserServiceTest extends Login {
     @Test
     public void gettUserId () {
 
-        Response response = Reusable.getIDMethod("userserviceGetAllUsersURL","73");
+        Response response = Reusable.getIDMethod("userserviceGetAllUsersURL","434");
         response.then().
                 assertThat().
-                statusCode(200).body("email",equalTo("ademalabas@gmail.com"));
+                statusCode(200).body("email",equalTo("bostanebubekir@gmail.com"));
 
 
 
@@ -70,11 +113,114 @@ public class UserServiceTest extends Login {
 
 
 
+    @Test
+    public void putUserEmailNotChanged () {
 
+        Map<String, Object> requestBody = userService.
+                userPostRegisterexpectedDataSetUp(faker.howIMetYourMother().character(), 187, 2, 5);
+        System.out.println("requestBody = " + requestBody);
 
+        Response response = Reusable.postMethod("userserviceRegisterUser", requestBody);
+        response.then().assertThat().statusCode(201);
 
+        Integer id = Integer.valueOf(response.jsonPath().getString("id"));
 
+        Map<String, Object> requestPutBody = userService.
+                userPostexpectedDataSetUp(faker.howIMetYourMother().character(), faker.internet().emailAddress());
 
+        response = Reusable.putMethod(url, requestPutBody);
 
+        response.then().assertThat().statusCode(406);
+
+        response.then().body("error",equalTo("Not Acceptable"));
+
+        response = Reusable.deleteMethod(url,id);
+
+        response.then().assertThat().statusCode(200);
+
+    }
+
+    @Test
+    public void putUserNamenotChanged () {
+
+        String email = faker.internet().emailAddress();
+
+        Map<String, Object> requestBody = userService.
+                userPostRegisterexpectedDataSetUp(email, 187, 2, 5);
+        System.out.println("requestBody = " + requestBody);
+
+        Response response = Reusable.postMethod("userserviceRegisterUser", requestBody);
+        response.then().assertThat().statusCode(201);
+
+        Integer id = Integer.valueOf(response.jsonPath().getString("id"));
+
+        Map<String, Object> requestPutBody = userService.
+                userPostexpectedDataSetUp(faker.name().username(), email);
+
+        response = Reusable.putMethod(url, requestPutBody);
+
+        response.then().assertThat().statusCode(406);
+
+        response.then().body("error",equalTo("Not Acceptable"));
+
+        response = Reusable.deleteMethod(url,id);
+
+        response.then().assertThat().statusCode(200);
+    }
+
+    @Test
+    public void deleteUser () {
+
+        Map<String, Object> requestBody = userService.
+                userPostRegisterexpectedDataSetUp(faker.internet().emailAddress(),187,2,5);
+        System.out.println("requestBody = " + requestBody);
+
+        Response response = Reusable.postMethod("userserviceRegisterUser",requestBody);
+        response.then().assertThat().statusCode(201);
+
+        Integer id = Integer.valueOf(response.jsonPath().getString("id"));
+
+        response = Reusable.getIDMethod(url,id);
+
+        response.then().assertThat().statusCode(200);
+
+        response = Reusable.deleteMethod(url,id);
+
+        response.then().assertThat().statusCode(200);
+
+        response = Reusable.getIDMethod(url,id);
+
+        response.then().assertThat().statusCode(404);
+
+    }
+
+    @Test
+    public void postRegisterNewUserAddNegativeTwo () {
+
+        Map<String, Object> requestBody = userService.
+                userPostRegisterexpectedDataSetUp("          ",187,2,5);
+        System.out.println("requestBody = " + requestBody);
+
+        Response response = Reusable.postMethod("userserviceRegisterUser",requestBody);
+        response.then().assertThat().statusCode(201);
+        Map<String,Object> actualBody= JsonToJava.convertJsonToJavaObject(response.asString(), HashMap.class);
+        System.out.println("actualBody = " + actualBody);
+
+        Assert.assertEquals(requestBody.get("email"),actualBody.get("email"));
+
+        Integer id = (Integer) actualBody.get("id");
+        response = Reusable.getIDMethod(url,id);
+
+        response.then().assertThat().statusCode(200);
+
+        response = Reusable.deleteMethod(url,id);
+
+        response.then().assertThat().statusCode(200);
+
+        response = Reusable.getIDMethod(url,id);
+
+        response.then().assertThat().statusCode(404);
+
+    }
 
 }
