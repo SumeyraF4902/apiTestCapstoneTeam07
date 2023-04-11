@@ -44,11 +44,11 @@ public class PermissionServiceTest extends Login {
 
         int id = (int) actualData.get("id");
 
-        response = Reusable.getIDMethod("permissionURLId", id);
+        response = Reusable.getIDMethod("permissionURL", id);
         System.out.println("creat sonrası get" + response);
         response.prettyPrint();
 
-        response = Reusable.deleteMethod("permissionURLId", id);
+        response = Reusable.deleteMethod("permissionURL", id);
         response.then().assertThat().statusCode(200);
 
     }
@@ -57,7 +57,7 @@ public class PermissionServiceTest extends Login {
     public void putPermessions() {
 
         PermissionServiceData permissionServiceData = new PermissionServiceData();
-        HashMap<String, Object> permissionsPostReq = permissionServiceData.expecdetData(null, "YILDIZ", "GÜNEŞ,AY", 2);
+        HashMap<String, Object> permissionsPostReq = permissionServiceData.expecdetData(null, "GÜNEŞ", "AY,YILDIZ", 2);
 
         Response response = Reusable.postMethod("permissionURL", permissionsPostReq);
         response.then().assertThat().statusCode(201);
@@ -70,10 +70,10 @@ public class PermissionServiceTest extends Login {
         response = Reusable.putMethod("permissionURL", permessionPutReq);
         response.then().assertThat().statusCode(200).contentType(ContentType.JSON);
 
-        response = Reusable.getIDMethod("permissionURLId", id);
+        response = Reusable.getIDMethod("permissionURL", id);
         response.prettyPrint();
 
-        response = Reusable.deleteMethod("permissionURLId", id);
+        response = Reusable.deleteMethod("permissionURL", id);
         response.then().assertThat().statusCode(200);
 
 
